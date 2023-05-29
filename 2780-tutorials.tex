@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{xcolor}
+\geometry{letterpaper, total={170mm,257mm}, left=20mm, top=20mm}
+\graphicspath{ {./images/} }
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+
+\title{MATH2780 - Tutorials}
+\author{Justin Bornais}
+\date{May 19, 2023}
+
+\begin{document}
+\maketitle
+\section{(13.3) Arc Length \& Curvature}
+Reminder of common formulas: \LARGE
+\begin{align*}
+    K&=\frac{|\vec{T}\,'(t)|}{|\vec{r}\,'(t)}  & K&=\frac{|\vec{r}\,'\times \vec{r}\,''|}{|\vec{r}\,'|^3} & \vec{T}(t)&=\frac{\vec{r}\,'(t)}{|\vec{r}\,'(t)|}
+\end{align*}
+\normalsize
+
+\subsection{Unit Normal Vector}
+The unit normal vectors tell us the direction in which the curve is turning. The vector $\vec{N}$ points towards the inside of the curve. The formula for the unit normal vector is as follows:
+
+\LARGE$\vec{N}(t)=\frac{\vec{T}\,'(t)}{|\vec{T}\,'(t)}$\normalsize
+\\The normal vector $\vec{N}$ is orthogonal to $\vec{T}$. Additionally, $\vec{T}$ and $\vec{T}\,'$ are orthogonal (or perpendicular). That means $\vec{N}\cdot\vec{T}=0$ and $\vec{T}\cdot\vec{T}\,'=0$.
+\begin{itemize}
+    \item Also note that $\vec{a}\cdot\vec{a}=|\vec{a}|^2$ or $|\vec{a}|\,|\vec{a}|\cos{0}=|\vec{a}|^2$
+\end{itemize}
+
+\subsubsection{Example 1}
+Find the unit tangent vector and unit normal vector of the following curve: $\vec{r}(t)=<t,t^2>$
+\paragraph{Solution} $\vec{T}(t)=\frac{\vec{r}\,'(t)}{|\vec{r}\,'(t)|}=\frac{<1,2t>}{\sqrt{1+4t^2}}=<\frac{1}{\sqrt{1+4t^2}},\frac{2t}{\sqrt{1+4t^2}}>$
+\\$\vec{T}\,'(t)=<\frac{1}{2}(1+4t^2)^{\frac{-3}{2}}(8t),\frac{2}{1+4t^2}>$
+\\\textbullet\ Side math: $\frac{d}{dx}\left(\frac{2t}{\sqrt{1+4t^2}}\right)
+    =\frac{(2)\sqrt{1+4t^2}-2t\cdot\frac{1}{2}(1+4t^2)^{\frac{-1}{2}}(8t)}{\left(\sqrt{1+4t^2}\right)^2}
+    =\frac{2\sqrt{1+4t^2}-\frac{8t^2}{\sqrt{1+4t^2}}}{1+4t^2}
+    =\frac{\frac{2(1+4t^2)-8t^2}{\sqrt{1+4t^2}}}{1+4t^2}
+    =\frac{2+8t^2-8t^2}{(1+4t^2)^{\frac{3}{2}}}$
+\\$|\vec{T}\,'(t)|=\sqrt{\frac{16t^2}{(1+4t^2)^3}+\frac{4}{(1+4t^2)^3}}
+    =\sqrt{\frac{16t^2+4}{(1+4t^2)^3}}=\sqrt{\frac{4(4t^2+1)}{(1+4t^2)^3}}
+    =\sqrt{\frac{4}{(1+4t^2)^2}}=\frac{2}{1+4t^2}$
+\\$\vec{N}(t)=\frac{\vec{T}\,'(t)}{|\vec{T}\,'(t)|}=\frac{<\frac{-4t}{(1+4t^2)^\frac{3}{2}},\frac{2}{(1+4t^2)^\frac{3}{2}}>}{\frac{2}{1+4t^2}}=<\frac{-2t}{\sqrt{1+4t^2}},\frac{1}{\sqrt{1+4t^2}}>$
+
+\subsubsection{Example 2}
+Find the unit tangent vector and unit normal vector of the following curve: $\vec{r}(t)=<3\cos{t},3\sin{t},2t>$
+\paragraph{Solution} $\vec{r}\,'(t)=<-3\sin{t},3\cos{t},2>$
+\\$|\vec{r}\,'(t)|=\sqrt{9\sin^2t+9\cos^2t+4}=\sqrt{13}$ (note that $9\sin^2t+9\cos^2t=9$)
+\\$\vec{T}(t)=\frac{\vec{r}\,'(t)}{|\vec{r}\,'(t)|}=\frac{<-3\sin{t},3\cos{t},2>}{\sqrt{13}}=<\frac{-3}{\sqrt{13}}\sin{t},\frac{3}{\sqrt{13}}\cos{t},\frac{2}{\sqrt{13}}=\frac{1}{\sqrt{13}}<-3\sin{t},3\cos{t},2>$
+\\$\vec{T}\,'(t)=\frac{1}{\sqrt{13}}<-3\cos{t},-3\sin{t},0>$
+\\$|\vec{T}\,'(t)|=\sqrt{\frac{1}{13}\left(9\cos^2t+9\sin^2t\right)}=\sqrt{\frac{1}{13}(9)}=\frac{\sqrt{9}}{\sqrt{13}}=\frac{3}{\sqrt{13}}$
+\\$\vec{N}(t)=\frac{\vec{T}\,'(t)}{|\vec{T}\,'(t)|}=\frac{\frac{1}{13}<-3\cos{t},-3\sin{t},0>}{\frac{3}{\sqrt{13}}}=\frac{<-3\cos{t},-3\sin{t},0>}{3}=<-\cos{t},-\sin{t},0>$
+
+\newpage
+\section{(14.2) Limits}
+In last class, we discussed limits. Namely, for $\Lim{(x,y)\to(a,b)}f(x,y)$ if we get an answer, we get the limit.
+If we get $\frac{0}{0}$ then we need to do something:
+\begin{itemize}
+    \itemsep 0em
+    \item Factorization.
+    \item Rationalization.
+    \item Polar coordinates $\left(x^2+y^2=r^2,\;x=r\cos\theta,\;y=r\sin\theta,\;r\to0,\;\theta\in[0,2\pi]\right)$.
+    \item Show two paths with different answers, so the limit DNE.
+\end{itemize}
+\subsubsection{Example 1}
+Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y)\to(0,0)}\frac{x^2+y^4+y^2}{5x^2+5y^2}$
+\paragraph{Solution} Use polar coordinates $x=r\cos\theta,\;y=r\sin\theta$
+\\$\Lim{(x,y)\to(0,0)}\frac{x^2+y^4+y^2}{5x^2+5y^2}=\Lim{r\to0}\frac{r^2\cos^2\theta+r^4\sin^4\theta+r^2\sin^2\theta}{5r^2\cos^2\theta+5r^2\sin^2\theta}
+=\Lim{r\to0}\frac{r^2+r^4\sin^4\theta}{5r^2(\cos^3\theta+\sin^2\theta)}=\Lim{r\to0}\frac{r^2(1+r^2\sin^4\theta)}{5r^2}
+=\Lim{r\to0}\frac{1+r^2\sin^4\theta}{5}
+\\=\frac{1+0}{5}=\frac{1}{5}$
+
+\subsubsection{Example 2}
+Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y)\to(0,0)}\frac{xy}{x^2+y^2}$
+\paragraph{Solution} Along $x=0\Rightarrow\Lim{y\to0}\frac{0}{y^2}=\Lim{y\to0}0=0$
+\\However, along $y=x\Rightarrow\Lim{x\to0}\frac{x(x)}{x^2+x^2}=\Lim{x\to0}\frac{x^2}{2x^2}=\frac{1}{2}$
+\qquad Thus the limit DNE.
+\paragraph{Alternate Solution} $x=r\cos\theta,\:y=r\sin\theta\Rightarrow=\Lim{r\to0}\frac{(r\cos\theta)(r\sin\theta)}{r^2}=\lim{r\to0}\cos\theta\sin\theta=\cos\theta\sin\theta$
+\\If $\theta=0\Rightarrow\text{the limit is }0,\;$ If $\theta=\frac{\pi}{4}\Rightarrow\text{the limit is}\left(\frac{1}{\sqrt{2}}\right)\left(\frac{1}{\sqrt{2}}\right)=\frac{1}{2}$
+
+\subsubsection{Example 3}
+Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y)\to(0,0)}\frac{x^2\cos^{-1}\left(\frac{x}{\sqrt{x^2+y^2}}\right)}{3x^2+3y^2}$
+\paragraph{Solution} Using the same polar coordinates: $=\Lim{r\to0}\frac{r^2\cos^2\theta\cos^{-1}\left(\cos\theta\right)}{3r^2}=\frac{\cos^2\theta(\theta)}{3}$
+\\\textbf{Note:} $\frac{x}{\sqrt{x^2+y^2}}=\frac{r\cos\theta}{\sqrt{r^2\cos^2\theta+r^2\sin^2\theta}}=\frac{r\cos\theta}{\sqrt{r^2(\cos^2\theta+\sin^2\theta)}}=\frac{r\cos\theta}{\sqrt{r^2(1)}}=\frac{r\cos\theta}{r}=\cos\theta$
+\\If $\theta=0\Rightarrow\text{the limit is }\frac{0}{3}=0$, but if $\theta=\pi\Rightarrow\text{the limit is}\frac{(\cos^2\pi)(\pi)}{3}=\frac{\pi}{3}$\qquad Thus the limit DNE.
+
+\subsubsection{Example 4}
+Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y)\to(0,0)}\frac{x^3\cos^{-1}\left(\frac{x}{\sqrt{x^2+y^2}}\right)}{3x^2+3y^2}$
+\paragraph{Solution} Using the same polar coordinates: $=\Lim{r\to0}\frac{r^3\cos^3\theta\cos^{-1}\left(\cos\theta\right)}{3r^2}=0$
+
+\subsubsection{Example 5}
+Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y,z)\to(4,0,0)}\frac{10x^2+y^2+z^2}{x-yz}$
+\paragraph{Solution} $\Lim{(x,y,z)\to(4,0,0)}\frac{10x^2+y^2+z^2}{x-yz}=\frac{10(4)^2+0+0}{4-0}=\frac{160}{4}=40$
+
+\newpage\subsubsection{Example 6}
+Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y,z)\to(1,0,2)}\frac{4x-2z}{2xy-zy+2x-z}$
+\paragraph{Solution} $\Lim{(x,y,z)\to(1,0,2)}\frac{4x-2z}{2xy-zy+2x-z}=\frac{4(1)-2(2)}{2(1)(0)-2(0)-2(1)-2}=\textcolor{red}{\frac{0}{0}}$
+\\Instead: $=\Lim{(x,y,z)\to(1,0,2)}\frac{2(2x-z)}{(2x-z)(y+1)}=\frac{2}{0+1}=2$
+
+\subsubsection{Example 7}
+Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y,z)\to(0,0,0)}\frac{6xz^2}{x^3+y^2+z^3}$
+\paragraph{Solution} Along the $x$-axis (set $y=0$ and $z=0$) $=\Lim{x\to0}\frac{6x(0)^2}{x^3+0+0}=\Lim{x\to0}\frac{0}{x^3}=\Lim{x\to0}0=0$
+\\Similarly, along the $y$ and $z$ axes respectively, you will get the same value of $0$.
+\\However, along $y=0$, $z=x\Rightarrow\Lim{x\to0}\frac{6xx^2}{x^3+0+x^3}=\Lim{x\to0}\frac{6x^3}{2x^3}=3$
+\\Since 2 paths give different limits, the limit DNE.
+
+\end{document}

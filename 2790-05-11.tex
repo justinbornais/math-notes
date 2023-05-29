@@ -1,0 +1,375 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{xcolor}
+\geometry{letterpaper, total={170mm,257mm}, left=20mm, top=20mm}
+\graphicspath{ {./images/} }
+\newtheorem{theorem}{Theorem}[section]
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+
+\title{Differential Equations}
+\author{Justin Bornais}
+\date{May 11, 2023}
+
+\begin{document}
+\maketitle
+\section{Introduction to Differential Equations}
+\paragraph{Differential Equation} Any equation that is differentiable. An example is $3y''+xy'-x^2=e^x$
+
+The \textbf{order} of a DE is the highest order of derivative.
+\begin{equation}
+    \textbf{Linear DE}
+    \left\{
+        \begin{array}{lr}
+            (i) y, y', y'', ..., & \text{Cannot have more than one power} \\
+            (ii) $\text{We can have }$, & x^n, e^x, \sin{x},$\text{ etc. but not }$ y^n, e^y, \cos{y},$\text{ etc.}$
+        \end{array}
+    \right\}
+\end{equation}
+
+Example of nonlinear DE: $3x^3y'' + yy' = e^x$ \\ \\
+$y=f(x)$ is a \textbf{solution} of a DE on an interval I (interval of existence of solution):
+\begin{itemize}
+    \itemsep 0em
+    \item y satisfies the DE.
+    \item $y$, $y'$, $y''$, ... are continuous on I.
+\end{itemize}
+
+\subsection{Initial Value Problems (IVP)}
+The first-order DE $y'=f(x,y)$ subject to $y(x_0)=y_0$ $\rightarrow$ is an IVP. \\
+The second-order DE $y''=f(x,y,y')$ subject to $\left(y(x_0)=y_0, y'(x_0)=y_1\right)$ is an IVP, while $\left(y(x_0)=y_0, y(x_1)=y_1\right)$ is a \textbf{Boundary Value Problem (BVP)}.
+\begin{itemize}
+    \itemsep 0em
+    \item Note: After $y_1$ both cases can be used.
+\end{itemize}
+
+\subsubsection{Example 1}
+$y=c_1\cos{x}+c_2\sin{x}$ is a soluation of the DE $y''+y=0$. Find the solution subject to the conditions $y(\pi)=1, y'(\pi)=-2$
+
+\paragraph{Solution:} $y(\pi)=1 \Rightarrow 1=c_1\cos{\pi}+c_2\sin{\pi}$
+
+$\Rightarrow 1=-c_1 \Rightarrow c_1=-1$ \\\\
+Then: $y=c_1\cos{x}+c_2\sin{x} \Rightarrow y'=-c_1\sin{x}+c_2\cos{x}$
+
+Using $y'(\pi)=-2$ $\Rightarrow -2=-c_1\sin{pi}+c_2\cos{pi} \Rightarrow -2=-c_2 \Rightarrow c_2=2$\\\\
+The solution is $y=-\cos{x}+3\sin{x}$
+
+\subsubsection{Example 2}
+$y=\frac{1}{x^2+c}$ is the one parameter solution of the DE $y'+2xy^2=0$. Find a solution of the IVP:\\ $y'+2xy^2=0, y(-3)=\frac{1}{5}$. Give the longest interval over which the solution is defined.
+
+\newpage \paragraph{Solution:} Using $y(-3)=\frac{1}{5}$, $y=\frac{1}{x^2+c}\Rightarrow \frac{1}{5}=\frac{1}{(-3)^2+c}$
+
+$\Rightarrow \frac{1}{5}=\frac{1}{9+c}$
+
+$\Rightarrow 9+c=5$
+
+$\Rightarrow c=-4$ \\
+Thus $y=\frac{1}{x^2-4}$ is a solution of the IVP. \\\\
+$y$ is continuous when $x^2-4\ne 0 \Rightarrow x^2\ne 4 \Rightarrow x\ne \pm 2$
+
+$y=\frac{1}{x^2-4}=\left(x^2-4\right)^{-1}$
+
+$y'=-1\left(x^2-4\right)^{-2}(2x)=\frac{-2x}{(x^2-4)^2}$ is continuous when $x^2-4\ne0\Rightarrow x\ne\pm2$ \\\\
+The longest interval is $\left(-\infty, -2\right)$ on which the solution is defined.\\
+
+\subsubsection{Not every DE is solvable}
+Consider the first-order IVP $xy'=2y,y(0)=0$. $y=0$ is a solution $y=0,y'=0 \Rightarrow x(0)=2(0) \Rightarrow 0=0$
+\begin{itemize}
+    \itemsep 0em
+    \item \textbf{Note:} a solution must be valid for all values of $x$.
+\end{itemize}
+$y=x^2$ is also a solution $\Rightarrow y'=2x \Rightarrow x(2x)=2x^2\Rightarrow 2x^2=2x^2\Rightarrow y(0)=0$
+
+\subsection{Existence Theorem}
+\begin{theorem}[1.2.1]
+    Let $R$ be a rectangular region $R=\left\{ (x,y) | a\leq x\leq b, c\leq y\leq d\right\}$ that contains $(x_0,y_0)$ in its interior.
+    If f and $\frac{df}{dy}$ are continous on R, then there exists an interval $(x_0-h,x_0+h)$ in R on which the IVP
+    $y'=f(x,y), y(x_0)=y_0$ has a unique solution.
+\end{theorem}
+\begin{itemize}
+    \item \textbf{Note: } We need to have the form $y'=f(x,y)$ to decide $f$.
+\end{itemize}
+Examples:
+\begin{itemize}
+    \item $f(x)=x^3+\cos{x}\Rightarrow f'(x)=3x^2-\sin{x}$
+    \item $f(x,y)=x^3\cos{y}+e^y-x^7$
+\end{itemize}
+For a partial derivative of $f$ with respect to $x\rightarrow\frac{df}{dx}$, we treat $y$ as a constant. \\
+For a partial derivative of $f$ with respect to $y\rightarrow\frac{df}{dy}$, we treat $x$ as a constant. \\
+An example: $f(x,y)=x^3\cos{y}+e^y-x^7$
+\begin{itemize}
+    \item $\frac{df}{dx}=(\cos{y})(3x^2)+0-7x^6$
+    \item $\frac{df}{dy}=x^3(-\sin{y})+e^y+0$
+\end{itemize}
+
+\subsubsection{Example 1}
+Determine whether the existence theorem guarantees that the IVP $xy'=2y, y(0)=0$ has a unique solution.
+
+\paragraph{Solution:} $y'=\frac{2y}{x}\rightarrow f(x,y)=\frac{2y}{x}$ is continuous when $x\ne0$
+\\Conditions of existence theorem are not satisfied. So there is no guarantee of a unique solution.
+
+\subsubsection{Example 2}
+Determine a region R of the xy-plane for which the DE $\left(1+y^3\right)y'=x^2$ would have a unique solution in an interval around (0,2) (a unique solution passing through (0,2)).
+
+\paragraph{Solution:} $(1+y^3)y'=x^2\Rightarrow y'=\frac{x^2}{1+y^3}\Rightarrow f(x,y)=\frac{x^2}{1+y^3}=x^2(1+y^3)^{-1}$ is continous when\\$1+y^3\ne0, y^3\ne1, y\ne-1$
+\\\\$\frac{df}{dy}=x^2\left[ -(1+y^3)^{-2}(3y^2) \right] =\frac{-3x^2y^2}{(1+y^3)^2}$
+\\$\frac{df}{dy}$ is continuous when $1+y^3\ne0\Rightarrow y\ne-1$
+
+Define $R=\left\{(x,y)|-10\leq x \leq 10, 0\leq y \leq 9\right\}$
+\begin{itemize}
+    \item \textbf{Note: } the boundaries of $x$ can be anything since there are no restrictions on $x$, so long as it contains $x=0$.
+    \item The boundaries of $y$ must contain $y=2$ and must not cross $y=-1$.
+\end{itemize}
+\newpage
+\subsubsection{Example 3}
+Find a region in the xy-plane on which the IVF $(1+y^3)y'=x^2, y(1)=-3$ would have a unique solution.
+
+\paragraph{Solution:}
+From example 2, $f,\frac{df}{dy}$ are continous when $y\ne-1$
+\\\\$R=\left\{(x,y)|-3\leq x\leq 5, -6\leq y\leq -2\right\}$ where the x boundaries contain $x=1$ and the y boundaries contain $y=-3$.
+
+\newpage
+\section{Solutions of First Order Differential Equations}
+In last class, 2.2, separable equation $\frac{dy}{dx}=g(x)h(y)$ which can turn into $\frac{dy}{h(y)}=g(x)dx$ and this can be integrated.
+\\When integrating, it must occur with the same variable.
+\begin{itemize}
+    \item $\int x^2dx=\frac{x^3}{3}$
+    \item $\int x^2du$ cannot integrate.
+\end{itemize}
+There are singular and implicit solutions.
+
+\subsection{Linear Equations}
+From section 1.1, nth order linear DE is represented by $\frac{d^ny}{dx^n}$ or $y^{(n)}$
+\\The equation is $a_n(x)\frac{d^ny}{dx^n}+a_{n-1}y^{(n-1)}+\dots+a_2(x)y''+a_1(x)y'+a_0(x)y=g(x)$
+\\\textbf{First order} is only concerned with $a_1(x)y'+a_0(x)y=g(x)$
+\\Linear equations are easy to solve and get explicit solutions easily. However there are \textbf{no} singular solutions of linear DEs.
+
+\subsubsection{Solving Linear 1st Order DEs}
+\paragraph{Step 1} Wrote tje DE in the standard form $y'+P(x)y=f(x)$\\
+$a_1(x)y'+a_0(x)y=g(x)$
+$y'+\frac{a_0(x)}{a_1(x)}y=\frac{g(x)}{a_1(x)}\Rightarrow y'+P(x)y=f(x)$ (standard form of 1st order linear DE)
+
+\paragraph{Step 2} Find the integrating factor (I.F.)
+\\I.F.$=e^{\int\!P(x)dx}$ (do not write $+C$ in this integration since that adds a wasted simplification step)
+
+\paragraph{Step 3} Multiply every term of the standard form equation (from \textbf{Step 1}) by the I.F.
+\large \\$e^{\int\!P(x)dx}y'+e^{\int\!P(x)dx}P(x)y=f(x)e^{\int\!P(x)dx}$
+\normalsize
+\\The LHS will automatically be $\frac{d}{dx}((I.F.)y)$ i.e. $\frac{d}{dx}\left(e^{\int\!P(x)dx}y\right)$
+\\$=e^{\int\!P(x)dx}y'+ye^{\int\!P(x)dx}(P(x))$
+
+\paragraph{Step 4} Integrate both sides w.r.t. $x$.
+\\$(I.F.)y=\int f(x)e^{\int P(x)dx}dx$
+\\The explicit solution will be \Large $y=\frac{\int f(x)e^{\int P(x)dx}dx}{I.F.}$\normalsize
+\\\\We get $y'+P(x)y=f(x)$. The interval of existence of solution is the interval over which \textbf{$P(x)$ and $f(x)$ are continuous}.
+\\As a reminder of section 1.2, for any 1st order DE $y'=f(x,y);y(x_0)=y_0$, if $f\&\frac{df}{dy}$ is continuous on R, then a unique solution exists.
+\\For linear equations, $y'=f(x)-P(x)y$, $\frac{df}{dy}=0-P(x)(1)$, where $f(x)-P(x)y=f(x,y)$
+
+\subsection{Example 1}
+Solve the differential equation $y'-2xy=x$. Give the largest interval I over which the solution is defined.
+
+\paragraph{Solution} $y'-2xy=x$ is a linear equation where $P(x)=-2x$, $f(x)=x$
+\\Since $P(x)$ and $f(x)$ are continuous on $R$, then the largest interval of existence of the solutio is $I=(-\infty,\infty)$
+\\\\$\int P(x)dx=\int -2xdx=\frac{-2x^2}{2}=-x^2$ (remember, don't write $+C$)
+\\Thus $I.F.=e^{\int\!P(x)dx}=e^{-x^2}$
+\\\\Next, multiple the DE by the I.F.
+\\$e^{-x^2}y'-2xe^{-x^2}y=e^{-x^2}x$, $\frac{d}{dx}\left(e^{-x^2}y\right)=e^{-x^2}x$
+\\Integrating w.r.t. $x$: $e^{-x^2}y=\int e^{-x^2}xdx$, let $u=-x^2$, $du=-2xdx$
+\\$\int e^u\frac{du}{-2}=\frac{-1}{2}\int e^udu=\frac{-1}{2}e^u+C=\frac{-e^{-x^2}}{2}+C$
+\\Thus $e^{-x^2}y=\frac{-1}{2}e^{-x^2}+C\Rightarrow y=\frac{\frac{-1}{2}e^{-x^2}}{e^{-x^2}}+\frac{C}{e^{-x^2}}\Rightarrow y=\frac{-1}{2}+Ce^{x^2}$
+\newpage
+\paragraph{Question:} Is the equation $y'-2xy=x$ separable?\\
+\textbf{Answer:} If you can separate $x$ from $y$, then it is separable. So $y'-2xy=x\Rightarrow y'=2xy+x\Rightarrow y'=x(2y+1)$
+Thus, the equation is separable.
+
+
+\subsection{Example 2}
+Solve the IVP: $xy'+2y=12x^4;\:y(1)=4$. Give the largest interval over which the solution is defined.
+\paragraph{Solution} $xy'+2y=12x^4\Rightarrow y'+\frac{2}{x}y=12x^3$ is standard form. $P(x)=\frac{2}{x}\;\&\;f(x)=12x^3$ are continuous on R except at $x=0$. Thus the longest interval of existence of the solution is $(0, \infty)$.
+\\$I.F.=e^{\int\!P(x)dx}=e^{\int\frac{2}{x}dx}=e^{2\ln|x|}=e^{\ln{|x|}^2}=|x|^2$
+\\\\Next we multiply the standard form function by the I.F. to get $x^2y'+x^2\left(\frac{2}{x}\right)y=x^2(12x^3)\Rightarrow \frac{d}{dx}(x^2y)=12x^5$
+\\Now we integrate w.r.t. $x$: $x^2y=\int 12x^5dx=2x^6+C$
+\\Thus $y=\frac{2x^6}{x^2}+\frac{C}{x^2}\Rightarrow y=2x^4+\frac{C}{x^2}$
+\\\\For the IVP, $y(1)=4$, $4=2(1)+\frac{C}{1}\Rightarrow C=2$
+\\Thus the solution of the IVP is $y=2x^4+2$
+\\Now, find the transient term in the solution: $\lim_{x \to \infty}\frac{2}{x^2}=0\Rightarrow\frac{2}{x^2}$ is the transient term.
+\begin{itemize}
+    \item \textbf{Note:} a \textbf{transient term} is a term which approaches 0 as $x$ approaches $\infty$.
+\end{itemize}
+
+\subsection{Example 3}
+Find the general solution (a linear DE) of $xy'+(1+x)y=e^{-x}\sin^2x$ (or, solve the DE).
+
+\paragraph{Solution} $y'+\frac{1+x}{x}y=\frac{e^{-x}\sin^2x}{x}$ is standard form, $P(x)=\frac{1+x}{x}$
+\\$\int\!P(x)dx=\int\frac{1+x}{x}dx=\int\left(\frac{1}{x}+1\right)dx=\ln{|x|}+x$ (no $+C$)
+\\Thus $I.F.=e^{\int\!P(x)dx}=e^{\int \ln{|x|}+xdx}=e^{\ln{|x|}}\cdot e^x=|x|e^x\Rightarrow I.F.=xe^x$
+\\$xe^xy'+xe^x(1+x)y=xe^x\frac{e^{-x}\sin^2x}{x}\Rightarrow\frac{d}{dx}(xe^xy)=\sin^2x$
+\\\\Integrating w.r.t. $x$: $xe^xy=\int\sin^2xdx=\frac{1}{2}\int (1-\cos 2x)dx=\frac{1}{2}\left(x-\frac{\sin 2x}{2}\right)$
+\\Thus $xe^xy=\frac{1}{2}\left(x-\frac{sin2x}{2}\right)+C\Rightarrow y=\frac{\frac{x}{2}-\frac{\sin 2x}{4}}{xe^x}+\frac{C}{xe^x}$
+
+\newpage
+\subsection{(2.4) Exact Equations}
+First order DEs:
+\begin{equation}
+    \left\{
+        \begin{array}{lr}
+            2.2 \rightarrow\;\text{Separable} & \frac{dy}{dx}=g(x)h(y)\\
+            2.3 \rightarrow\;\text{Linear equation} & y'+P(x)y=f(x)\\
+        \end{array}
+    \right\}
+\end{equation}
+\\Differential: $\delta x=dx$
+\begin{itemize}
+    \itemsep 0em
+    \item $y=f(x)\rightarrow$ differential is $dy=f'dx$
+    \item $z=f(x,y)\rightarrow$ differential is $dz=\frac{df}{dx}+\frac{df}{dy}dy$
+    \item $\frac{df}{dx}\rightarrow$ treat $y$ as a constant.
+    \item $\frac{df}{dx}\rightarrow$ treat $x$ as a constant.
+\end{itemize}
+
+Consider $f(x,y)=x^3+x^2y\Rightarrow \frac{df}{dx}=3x^2+(2x)y$ and $\frac{df}{dy}=0+x^2(1)$
+\\$x^3+x^2y=7\;[1]$, take derivatives to get: $(3x^2+2xy)dx+x^2dy=0 \;[2]$. [1] is a solution of the DE [2].
+\paragraph{}A DE of the form $\frac{df}{dx}dx+\frac{df}{dy}dy=0$ is called an \textbf{exact DE}.
+\paragraph{How to decide if a DE is exact}A DE of the form $M(x,y)dx+N(x,y)dy=0$ is an exact equation iff $\frac{dM}{dy}=\frac{dN}{dx}$ or $M_y=N_x$
+\paragraph{How to solve the exact equation}We have two equations $\frac{df}{dx}=M\;[1]$ and $\frac{df}{dy}=N\;[2]$
+\begin{itemize}
+    \itemsep 0em
+    \item The partial integration $\int\frac{df}{dx}dx=f(x,y)$
+    \item The partial integration $\int\frac{df}{dy}dy=f(x,y)$
+\end{itemize}
+Doing the partial integration of [1]: $f(x,y)=\int Mdx+g(y)$, where $g(y)$ is the constant of integration.
+\\Find $\frac{df}{dy}$ and substitute in [2] to find $g(y)$.
+\\$f(x,y)=...$ (the solution is $f(x,y)=C$)
+
+\subsubsection{Exampole 1}
+Determine whether the DE is exact or not. If it is exact, then solve it. $y'=\frac{-2xy}{1+x^2}$
+
+\paragraph{Solution} $y'=\frac{-2xy}{1+x^2}\Rightarrow\frac{dy}{dx}=\frac{-2xy}{1+x^2}\Rightarrow (1+x^2)dy=-2xydx\Rightarrow2xydx+(1+x^2)dy=0$
+\\$M_y=\frac{dM}{dy}=2x(1)$ and $N_x=\frac{dN}{dx}=2x$, $M_y=N_x\Rightarrow$ exact.
+\\\\\textbf{To solve}, $\frac{df}{dx}=M$ and $\frac{df}{dy}=N$
+$\Rightarrow\frac{df}{dx}=2xy\;[1]$ and $\frac{df}{dy}=1+x^2\;[2]$
+\\Perform partial integration of [1] w.r.t. $x$:
+$f(x,y)=2y\frac{x^2}{2}+g(y)\;[3]\Rightarrow \frac{df}{dy}=(1)x^2+g'(y)$
+\\Next substitute equation [2]:
+$x^2+g'(y)=1+x^2\Rightarrow g'(y)=1$ (cannot have any $x$ terms)
+\\Integrating w.r.t. $y$: $g(y)=\int1dy\Rightarrow g(y)=y$ or $g(y)=y+C$ (preferred without the $+C$)
+\\Substitute $g(y)$ in [3] to get $f(x,y)=x^2y+y$ or $f(x,y)=x^2y+y+C$
+\\\\The solution of the DE is $f(x,y)=C\Rightarrow x^2y+y=C$ or $f(x,y)=0\Rightarrow x^2y+y+C=0$
+
+\subsubsection{Example 2}
+Determine whether the DE is exact or not. If it is exact, then solve it. $(xy+y^2)dx+(x^2+xy)dy=0$
+
+\paragraph{Solution} $M_y=x(1)+2y$ and $N_x=2x+(1)y \Rightarrow M_x\ne N_y\Rightarrow$ not exact.
+
+\subsubsection{Example 3}
+Determine whether the DE is exact or not. If it is exact, then solve it. $(x+\sin{y})dx=(e^y=x\cos{y})dy$
+
+\newpage\paragraph{Solution} $(x+\sin{y})dx-(e^y-x\cos{y})dy=0$
+\\Here, $M=x+\sin{y}$ and $N=-(e^y-x\cos{y})=-e^y+x\cos{y}$
+\\$M_y=\cos{y}$ and $N_x=(1)\cos{y}\Rightarrow M_y=N_x\Rightarrow$ Exact.
+\\\\\textbf{To solve}, $\frac{df}{dx}=M\Rightarrow\frac{df}{dx}=x+\sin{y}\;[1]$
+\\$\frac{df}{dy}=N\Rightarrow\frac{df}{dy}=-e^y+x\cos{y}\;[2]$
+\\Partial integration of [2] w.r.t. $y$: $f(x,y)=-e^y+x\sin{y}+g(x)\;[3]$
+\\$\frac{df}{dx}=0+(1)\sin{y}+g'(x)$
+\\Substitute in [1]: $\sin{y}+g'(x)=x+\sin{y}\Rightarrow g'(x)=x$ (cannot have $y$) $\Rightarrow g(x)=\frac{x^2}{2}$
+\\Substitute $g(x)$ in [3]: $f(x,y)=-e^y+x\sin{y}+\frac{x^2}{2}$
+\\The solution is $f(x,y)=C\Rightarrow -e^y+x\sin{y}+\frac{x^2}{2}=C$
+
+\subsubsection{Example 4}
+Solve the IVP: $(ey-xe^{xy})y'=2+ye^{xy}\;;\;y(0)=1$
+
+\paragraph{Solution} $(2y-xe^{xy})dy=(2+ye^{xy})dx\Rightarrow(2+ye^{xy})dx-(2y-xe^{xy})=0$
+\\$M=2+ye^{xy}\Rightarrow\frac{dM}{dy}=0+(1)e^{xy}+ye^{xy}(x)$
+\\$N=-2y+xe^{xy}\Rightarrow\frac{dN}{dx}=0+(1)e^{xy}+xe^{xy}(y)$
+\\Since $M_y=N_x$, this is an exact equation.
+\\\\$\frac{df}{dx}=M\Rightarrow\frac{df}{dx}=2+ye^{xy}\;[1]$
+\\$\frac{df}{dy}=N\Rightarrow\frac{df}{dy}=-2y+xe^{xy}\;[2]$
+\\Partial integration of [1] w.r.t. x: $f(x,y)=\int(2+ye^{xy})dx=2x+y\frac{e^{xy}}{y}+g(y)\;[3]$
+\\$\frac{df}{dy}=0+e^{xy}(x)+g'(y)$
+\\Substitute in [2]: $xe^{xy}+g'(y)=-2y+xe^{xy}\Rightarrow g'(y)=-2y$
+\\$g(y)=\int -2ydy=-2\frac{y^2}{2}$
+\\Substituting in [3]: $f(x,y)=2x+e^{xy}-y^2$
+\\The solution of the DE is $f(x,y)=C\Rightarrow2x+e^{xy}-y^2=C$
+\\\\$y(0)=1\Rightarrow\text{Substitute }x=0\text{ and }y=1:\;2(0)+e^{(0)(1)}-(1)^2=C\Rightarrow1-1=C\Rightarrow C=0$
+\\The solution of the IVP is $ex+e^{xy}-y^2=0$
+
+\subsection{More on Exact Equations}
+Sometimes, we can multiply the DE by an integrating factor and the DE becomes an exact DE. We solve by the mothod of exact equations:
+\begin{enumerate}
+    \itemsep 0em
+    \item If $\frac{M_y-N_x}{N}$ is a function of $x$ only (no $y$ terms), then $I.F.=\mu=e^{\int\frac{M_y-N_x}{N}dx}$
+    \item If $\frac{N_x-M_y}{M}$ is a function of $y$ only (no $x$ terms), then $I.F.=\mu=e^{\int\frac{N_x-M_y}{M}dy}$
+\end{enumerate}
+
+\subsubsection{Example 1}
+Find an I.F. to make this DE exact and then solve it: $(y^2-y)dx+xdy=0$
+\paragraph{Solution} $M=y^2-y,\;M_y=2y-1,\;N=x,\;N_x=1$\qquad $M_y\neq N_x\Rightarrow$ not exact.
+\\$\frac{M_y-N_x}{N}=\frac{(2y-1)-1}{x}$ (not in terms of $x$ only)
+\\$\frac{N_x-M_y}{M}=\frac{1-(2y-1)}{y^2-y}=\frac{1-2y+1}{y^2-y}=\frac{2-2y}{y^2-y}=\frac{-2(1-y)}{y(y-1)}=\frac{-2}{y}$ (good!)
+\\$I.F.=\mu=e^{\int\frac{N_x-M_y}{M}dy}=e^{\int\frac{-2}{y}dy}=e^{-2\ln|y|}=e^{\ln|y|^{-2}}=|y|^{-2}=\frac{1}{y^2}$
+\\\\Multiply the given DE by $\frac{1}{y^2}$: $\frac{1}{y^2}(y^2-y)dx+\frac{1}{y^2}xdy=0\Rightarrow(1-\frac{1}{y})dx+\frac{x}{y^2}dy=0$
+\\Now, $M=1-\frac{1}{y}$ and $N=\frac{x}{y^2}\Rightarrow M_y=-(-1y^{-2})=\frac{1}{y^2},\l\;N_x=\frac{1}{y^2}(1)=\frac{1}{y^2}$ (unnecessary to check)
+\newpage To solve: $\frac{df}{dx}=M\Rightarrow\frac{df}{dx}=1-\frac{1}{y}\;[1]$
+\qquad $\frac{df}{dy}=N\Rightarrow\frac{df}{dy}=\frac{x}{y^2}\;[2]$
+\\Partial integration of [1] w.r.t. $x\Rightarrow f(x,y)=x-\frac{1}{y}(x)+g(y)\;[3]$
+\\$\frac{df}{dy}=0+\frac{x}{y^2}+g'(y)$ (substitute this into [2])
+\\$\frac{x}{y^2}+g'(y)=\frac{x}{y^2}\Rightarrow g'(y)=0\Rightarrow g(y)=0$ or $g(y)=C$
+\\So [3] gives $f(x,y)=x-\frac{x}{y}$ or $f(x,y)=x-\frac{x}{y}+C$
+\\Thus the solution is $f(x,y)=C\Rightarrow x-\frac{x}{y}=C$ or $f(x,y)=0\Rightarrow x-\frac{x}{y}+C=0$
+\\\\Now, this is only the case if $y\neq0$ (since the I.F. involves $y$ being in the denominator).
+\\So we can check if $y=0$ is a solution: $dy=y'dx=0dx=0$
+\\$(0^2-0)dx+xdy=0\Rightarrow(0^2-0)dx+x(0)=0\Rightarrow0+0=0\Rightarrow y=0$ is a solution.
+
+\subsubsection{Example 2}
+Find an I.F. to make this DE exact: $y(x+y+1)dx+(x+2y)dy=0$ (do not solve the equation)
+\paragraph{Solution}
+$M=xy+y^2+y$ and $N=x+2y$\qquad $M_y=x+2y+1$ and $N_x=1$
+\\$\frac{M_y-N_x}{N}=\frac{(x+2y+1)-1}{x+2y}=\frac{x+2y}{x+2y}=1\Rightarrow I.F.=\mu=e^{\int 1dx}=e^x$
+
+\subsection{Solutions by Substitution}
+We do 3 kinds of substitutions which can be used to solve 1st order DEs.
+\subsection{Homogeneous Equations}
+A function $f(x,y)$ is called a homogeneous function of degree $a$ if $f(tx,ty)=t^af(x,y)$
+\\\\To determine if the equation $f(x,y)=x^2+xy$ is homogeneous, calculate $f(tx,ty)$.
+\\$f(tx,ty)=(tx)^2+(tx)(ty)=t^2x^2+t^2xy=t^2(x^2+xy)=t^2f(x,y)\Rightarrow$ Thus $f$ is a homogeneous function of degree 2.
+\\For more functions: \begin{itemize}
+    \itemsep 0em
+    \item $f(x,y)=x+3$, $f(tx,ty)=tx+3\Rightarrow$ not homogeneous.
+    \item $f(x,y)=\sin{x}-\sin{y}$\quad$f(tx,ty)=\sin{tx}-\sin{ty}\Rightarrow$ not homogeneous. (Usually anything with $\sin{x}$ or $\sin{y}$ is not homogeneous)
+    \item $f(x,y)=\sin{\frac{x}{y}}$\quad$f(tx,ty)=\sin{\frac{tx}{ty}}=\sin{\frac{x}{y}}=t^0\sin\frac{x}{y}\Rightarrow$ homogeneous. (this is an exception to the above)
+    \item $f(x,y)=\ln{x}-\ln{y}$\quad$f(tx,ty)=\ln{tx}-\ln{ty}=\ln{\frac{tx}{ty}}=\ln{\frac{x}{y}}=t^0(\ln{x}-\ln{y})\Rightarrow$ homogeneous of degree 0.
+\end{itemize}
+A differential equation $Mdx+Ndy=0$ is homogeneous if both $M$ and $N$ are homogeneous functions of the same degree.
+\paragraph{Example 1} For $(x^2+xy)dx+xy^2dy=0$, $M$ is homogeneous of degree 2 and $N$ is homogeneous of degree 3. Thus the equation is not homogeneous.
+\paragraph{Example 2} For $(x+3)dx+ydy=0$, it is not homogeneous because $M$ is not homogeneous.
+\paragraph{Example 3} For $(x^2+xy)dx+(xy-y^2)dy=0$, since both $M$ and $N$ are homogeneous of degree 2, thus the equation is homogeneous. (you can often check the power of $M$ and $N$ to check if it's homogeneous)
+
+\subsubsection{Solving a Homogeneous Equation}
+\textbf{Case 1:} Let $y=ux$ and $dy=udx+udu\to$ the homogeneous equation will become a separable equation in $u$ and $x$.
+Solve it and then replace $u=\frac{y}{x}$ in the solution.
+\\\textbf{Case 2:} Let $x=vy$ and $dx=vdy+ydv\to$ the homogeneous equation will become a separable equation in $v$ and $y$.
+Solve it and then replace $v=\frac{x}{y}$ in the solution.
+
+\newpage\paragraph{Example} Solve the DE by using an approprite substitution: $ydx-2(x+y)dy=0$
+\paragraph{Solution} Let $y=ux$ and $dy=udx+xdu$\qquad\textbf{or} let $x=vy$ and $dx=vdy+ydv$
+\\$uxdx-(2x+2ux)(udx+xdu)=0$\qquad\qquad\qquad\textbf{or} $y(vdy+ydv)-(2vy+2y)dy=0$
+\\\textcolor{red}{This is harder to solve}\qquad\qquad\qquad\qquad\qquad\qquad\textbf{or} $vydy+y^2dv-2vydy-2ydy=0$
+\\$y^2dv-vydy-2ydy=0$
+\\$y^2dv=vydy+2ydy\Rightarrow y^2dv=ydy(v+2)\Rightarrow\frac{dv}{v+2}=\frac{ydy}{y^2}\Rightarrow\frac{dv}{v+2}=\frac{1}{y}dy\to$ a separable equation.
+\\\\If we went the $u$ way: $\int\frac{-dx}{x}=\int\frac{2+2u}{u+2u^2}du\dots$ needs partial fraction.
+\\Instead, $\int\frac{dv}{v+2}=\int\frac{1}{y}dy\Rightarrow \ln|v+2|=\ln|y|+C$
+\\Replace $v$ by $\frac{x}{y}\Rightarrow\ln|\frac{x}{y}+2|=\ln|y|+C$
+\\\\Is $y=0$ also a solution?
+\\Well, $y=0\Rightarrow dy=0$. Substitute into original equation: $(0)dx-2(x+0)(0)=0\Rightarrow0-0=0\\\Rightarrow y=0$ is also a solution.
+\\$v+2=0\Rightarrow\frac{x}{y}+2=0\Rightarrow\frac{x}{y}=-2\Rightarrow x=-2y\Rightarrow y=\frac{-x}{2}$
+\\Is this a solution? Well, $y=\frac{-x}{2}\Rightarrow dy=y'dx=\frac{-1}{2}dx$
+\\Substitute into original equation: $\frac{-x}{2}dx-2(x-\frac{x}{2})(\frac{-1}{2}dx)=0\Rightarrow
+\frac{-x}{2}dx+\frac{x}{2}dx=0\Rightarrow0=0\\\Rightarrow y=\frac{-x}{2}$ is also a solution.
+
+
+\subsection{Bernoulli's Equation}
+\subsection{Linear Substition}
+
+\end{document}

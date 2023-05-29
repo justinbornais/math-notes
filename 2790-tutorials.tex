@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{xcolor}
+\geometry{letterpaper, total={170mm,257mm}, left=20mm, top=20mm}
+\graphicspath{ {./images/} }
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+
+\title{MATH2790 - Tutorials}
+\author{Justin Bornais}
+\date{May 19, 2023}
+
+\begin{document}
+\maketitle
+\section{(2.3) Linear 1st Order DE}
+Reminder of standard form: $y'+P(x)y=f(x)$ where $P(x)$ and $f(x)$ are continuous. In many real life applications, $P(x)$ or $f(x)$ may be \textit{piecewise continuous}.
+
+\paragraph{Piecewise Linear DEs} $P(x)$ or $f(x)$ is piecewise continuous on I.
+\paragraph{Example} Solve the IVP: $\frac{dy}{dx}+y=f(x),\;y(0)=1$
+where $f(x)=
+\begin{cases}
+    1 & 0\leq x\leq 1 \\
+    -1 & x > 1
+\end{cases}
+$
+
+\paragraph{Solution} For $0\leq x\leq 1$, the DE is $\frac{dy}{dx}+y=1
+\\I.F.=e^{\int P(x)dx}=e^{\int 1dx}=e^x$
+\\Multiply the equation by I.F: $e^xy'+e^xy=e^x\Rightarrow \frac{d}{dx}\left(e^xy\right)=e^x
+\\\int \frac{d}{dx}(e^xy)dx=\int e^xdx
+\\e^xy=e^x+C_1\Rightarrow y=\frac{e^x}{e^x}+\frac{C_1}{e^x}\Rightarrow y=1+C_1e^{-x},\;0\leq x\leq1
+$
+\\\\For $x>1$, the DE is $\frac{dy}{dx}+y=-1
+\\I.F.=e^{\int P(x)dx}=e^x$ (it's the same as the above case since $P(x)$ remains unchanged)
+\\Multiply the equation by I.F: $e^xy'+e^xy=-e^x\Rightarrow \frac{d}{dx}\left(e^xy\right)=-e^x
+\\\int \frac{d}{dx}(e^xy)dx=\int -e^xdx
+\\e^xy=-e^x+C_2\Rightarrow y=\frac{-e^x}{e^x}+\frac{C_2}{e^x}\Rightarrow y=-1+\frac{C_2}{e^x}, x>1$
+\\\\Thus $y=\begin{cases}
+    1+C_1e^{-x} & 0\leq x\leq1 \\
+    -1+C_2e^{-x} & x>1
+\end{cases}\;\;\;y(0)=1\Rightarrow1=1+C_1e^{-0}\Rightarrow1=1+C_1\Rightarrow C_1=0$
+\\So $y=\begin{cases}
+    1 & 0\leq x\leq1\\
+    -1+C_2e^{-x} & x>1
+\end{cases}\;\;\;$
+For $y$ to be the solution, we need $y$ to be continuous at $x=1$.
+\\$y(1)=\lim_{x \to 1^-}y=\lim+{x\to 1^+}
+\\1=\lim_{x\to 1^-}1=\lim_{x\to 1^+}\left(-1+C_2e^{-x}\right)
+\Rightarrow1=1=-1+C_2e^{-1}\Rightarrow2=C_2e^{-1}\Rightarrow C_2=2e$
+\\Thus the solution of the IVP is $y=\begin{cases}
+    1 & 0\leq x\leq1 \\
+    -1+2e^{1-x} & x>1
+\end{cases}$
+
+
+\subsubsection{Example 1.1 \#19} Verify that $\ln{\frac{2x-1}{x-1}}=t$ is an implicit solution of the DE $\frac{dx}{dt}=(x-1)(2x-1)$
+
+\paragraph{Solution} Differentiate each term w.r.t. $t$.
+\\$\frac{1}{\frac{2x-1}{x-1}}\cdot\frac{(2x')(x-1)-(2x-1)x'}{(x-1)^2}=1\Rightarrow\frac{1}{2x-1}\cdot\frac{(2x')(x-1)-(2x-1)(x')}{x-1}=1
+\\x'\left[2x-2-2x+1\right]=(2x-1)(x-1)\Rightarrow x'=(x-1)(1-2x)\rightarrow DE
+$
+\\Now we will find one explicit solution: $\ln{\frac{2x-1}{x-1}}=t
+\Rightarrow\frac{2x-1}{x-1}=e^t\Rightarrow2x-1=e^t(x-1)\Rightarrow2x-1=xe^t-e^t
+\Rightarrow2x-xe^t=-e^t+1\Rightarrow x=\frac{-e^t+1}{2-e^t}$
+
+\newpage\section{Solutions by Homogeneous Substitutions}
+Reminder: $Mdx+Ndy=0$ is a homogeneous equation if both $M$ and $N$ are homogeneous functions of the same degree (that is, $f(tx,ty)=t^af(x,y)$ with a degree of $a$).
+To solve a homogeneous equation, choose one of the following:
+\begin{itemize}
+    \itemsep 0em
+    \item Let $y=ux$ and $dy=udx+xdu\to$ separable equation in $x$ and $u\to$ solve and replace $u=\frac{y}{x}$.
+    \item Let $x=vy$ and $dx=vdy+ydv\to$ separable equation in $v$ and $y\to$ solve and replace $v=\frac{x}{y}$.
+\end{itemize}
+Homoegeneous equations can have a singular solution.
+
+\subsubsection{Example}
+Solve the DE using appropriate substitution: $(x^4+2y^4)dx-xy^3dy=0$
+\paragraph{Solution} Both $M$ and $N$ are homogeneous of degree 4, thus the given DE is homogeneous.
+\\Let $y=ux$ and $dy=udx+xdu\Rightarrow(x^4+2u^4x^4)dx-xu^3x^3(udx+xdu)=0$
+\\$x^4dx+2u^4x^4dx-u^4x^4dx-u^3x^4du=0
+\\x^4dx+u^4x^4dx-u^3x^5du=0
+\\x^4dx+u^4x^4dx=u^3x^4du
+\\x^4dx(1+u^4)=u^3x^5du
+\\\frac{x^4}{x^5}dx=\frac{u^3}{1+u^4}du
+\\\int\frac{1}{x}dx=\int\frac{u^3}{1+u^4}du\to$separable if $x\neq0$ and if $1+u^4\neq0$.
+\\$\ln|x|=\frac{1}{4}\ln|1+u^4|+C$
+\\Replace $u=\frac{y}{x}$: $\ln|x|=\frac{1}{4}\ln|1+\frac{y^4}{x^4}|+C$
+\\$\ln|x|=\frac{1}{4}\ln\left|\frac{x^4+y^4}{x^4}\right|+C$
+\\$\ln|x|=\frac{1}{4}\ln|x^4+y^4|-\frac{1}{4}\ln{x^4}+C$
+\\$\ln|x|=\frac{1}{4}\ln|x^4+y^4|-\ln|x^4|^{\frac{1}{4}}+C
+\\2\ln|x|=\ln|x^4+y^4|^{\frac{1}{4}}+C
+\\\ln|x|^2-\ln|x^4+y^4|^{\frac{1}{4}}=C
+\\\ln\left(\frac{x^2}{|x^4+y^4|^{\frac{1}{4}}}\right)=C$
+
+\end{document}

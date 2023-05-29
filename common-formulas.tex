@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{letterpaper, total={170mm,257mm}, left=20mm, top=20mm}
+\graphicspath{ {./images/} }
+
+\title{Common Formulas}
+\author{Justin Bornais}
+\date{\today}
+
+\begin{document}
+\maketitle
+\Large
+$\int e^{ax}dx=\frac{e^{ax}}{a}+C
+\\\int xe^xdx\rightarrow$ Integrate by parts using product rule: $\int udv=uv'-\int uvdv
+\\\int xe^{x^2}dx \rightarrow \text{let } u=x^2, du=2xdx
+\\\int\frac{x^2}{x^2+9}dx=\int\left(\frac{x^2+9}{x^2+9}-\frac{9}{x^2+9}\right)
+\\\int\frac{xdx}{x^2+9}\rightarrow \text{let } u=x^2+9, du=2xdx
+\\\int\frac{dx}{x^2+a^2}=\frac{1}{a}\tan^{-1}{\frac{x}{a}}
+\\\int\sin{ax}dx=\frac{-\cos{ax}}{a}+C
+\\\int\cos{ax}dx=\frac{\sin{ax}}{a}+C
+$
+
+%\part{} then \chapter then \section then \subsection then \subsubsection
+% then \paragraph then \subparagraph
+\end{document}
