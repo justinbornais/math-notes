@@ -8,6 +8,7 @@
 \graphicspath{ {./images/} }
 \newtheorem{theorem}{Theorem}[section]
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newcommand{\p}{\partial}
 
 \title{Differential Equations}
 \author{Justin Bornais}
@@ -167,7 +168,7 @@ $y'+\frac{a_0(x)}{a_1(x)}y=\frac{g(x)}{a_1(x)}\Rightarrow y'+P(x)y=f(x)$ (standa
 \\As a reminder of section 1.2, for any 1st order DE $y'=f(x,y);y(x_0)=y_0$, if $f\&\frac{df}{dy}$ is continuous on R, then a unique solution exists.
 \\For linear equations, $y'=f(x)-P(x)y$, $\frac{df}{dy}=0-P(x)(1)$, where $f(x)-P(x)y=f(x,y)$
 
-\subsection{Example 1}
+\subsubsection{Example 1}
 Solve the differential equation $y'-2xy=x$. Give the largest interval I over which the solution is defined.
 
 \paragraph{Solution} $y'-2xy=x$ is a linear equation where $P(x)=-2x$, $f(x)=x$
@@ -185,7 +186,7 @@ Solve the differential equation $y'-2xy=x$. Give the largest interval I over whi
 Thus, the equation is separable.
 
 
-\subsection{Example 2}
+\subsubsection{Example 2}
 Solve the IVP: $xy'+2y=12x^4;\:y(1)=4$. Give the largest interval over which the solution is defined.
 \paragraph{Solution} $xy'+2y=12x^4\Rightarrow y'+\frac{2}{x}y=12x^3$ is standard form. $P(x)=\frac{2}{x}\;\&\;f(x)=12x^3$ are continuous on R except at $x=0$. Thus the longest interval of existence of the solution is $(0, \infty)$.
 \\$I.F.=e^{\int\!P(x)dx}=e^{\int\frac{2}{x}dx}=e^{2\ln|x|}=e^{\ln{|x|}^2}=|x|^2$
@@ -199,7 +200,7 @@ Solve the IVP: $xy'+2y=12x^4;\:y(1)=4$. Give the largest interval over which the
     \item \textbf{Note:} a \textbf{transient term} is a term which approaches 0 as $x$ approaches $\infty$.
 \end{itemize}
 
-\subsection{Example 3}
+\subsubsection{Example 3}
 Find the general solution (a linear DE) of $xy'+(1+x)y=e^{-x}\sin^2x$ (or, solve the DE).
 
 \paragraph{Solution} $y'+\frac{1+x}{x}y=\frac{e^{-x}\sin^2x}{x}$ is standard form, $P(x)=\frac{1+x}{x}$
@@ -310,7 +311,7 @@ Find an I.F. to make this DE exact and then solve it: $(y^2-y)dx+xdy=0$
 \\$\frac{N_x-M_y}{M}=\frac{1-(2y-1)}{y^2-y}=\frac{1-2y+1}{y^2-y}=\frac{2-2y}{y^2-y}=\frac{-2(1-y)}{y(y-1)}=\frac{-2}{y}$ (good!)
 \\$I.F.=\mu=e^{\int\frac{N_x-M_y}{M}dy}=e^{\int\frac{-2}{y}dy}=e^{-2\ln|y|}=e^{\ln|y|^{-2}}=|y|^{-2}=\frac{1}{y^2}$
 \\\\Multiply the given DE by $\frac{1}{y^2}$: $\frac{1}{y^2}(y^2-y)dx+\frac{1}{y^2}xdy=0\Rightarrow(1-\frac{1}{y})dx+\frac{x}{y^2}dy=0$
-\\Now, $M=1-\frac{1}{y}$ and $N=\frac{x}{y^2}\Rightarrow M_y=-(-1y^{-2})=\frac{1}{y^2},\l\;N_x=\frac{1}{y^2}(1)=\frac{1}{y^2}$ (unnecessary to check)
+\\Now, $M=1-\frac{1}{y}$ and $N=\frac{x}{y^2}\Rightarrow M_y=-(-1y^{-2})=\frac{1}{y^2},\;\;N_x=\frac{1}{y^2}(1)=\frac{1}{y^2}$ (unnecessary to check)
 \newpage To solve: $\frac{df}{dx}=M\Rightarrow\frac{df}{dx}=1-\frac{1}{y}\;[1]$
 \qquad $\frac{df}{dy}=N\Rightarrow\frac{df}{dy}=\frac{x}{y^2}\;[2]$
 \\Partial integration of [1] w.r.t. $x\Rightarrow f(x,y)=x-\frac{1}{y}(x)+g(y)\;[3]$
@@ -368,8 +369,79 @@ Solve it and then replace $v=\frac{x}{y}$ in the solution.
 \\Substitute into original equation: $\frac{-x}{2}dx-2(x-\frac{x}{2})(\frac{-1}{2}dx)=0\Rightarrow
 \frac{-x}{2}dx+\frac{x}{2}dx=0\Rightarrow0=0\\\Rightarrow y=\frac{-x}{2}$ is also a solution.
 
-
 \subsection{Bernoulli's Equation}
+$\frac{dy}{dx}+P(x)y=f(x)y^n$ where $n\in R, n\neq0$ and $n\neq1$
+\\If $n=0\Rightarrow\frac{dy}{dx}+P(x)y=f(x)(1)\rightarrow$ linear.
+\\If $n=1\Rightarrow\frac{dy}{dx}+P(x)y=f(x)y\Rightarrow\frac{dy}{dx}+(P(x)-f(x))y=0\rightarrow$ linear equation.
+\\If $n\neq0$ and $n\neq1$ then we use the substitution $u=y^{1-n}$ and the Bernoulli's equation changes to a linear equation $\to$ solve linear equation $\to$ replace $u$.
+\\\\Another way: for the equation $\frac{dy}{dx}+P(x)y=f(x)y^n$, let $u=y^{1-n}$ and the equation turns into:
+\\$\frac{du}{dx}+(1-n)P(x)u=(1-n)f(x)\Rightarrow$ linear equation in $u$.
+
+\subsubsection{Example 1}
+Solve the DEs using an appropriate substitution: $\frac{dy}{dx}-y=e^xy^2$
+\paragraph{Solution} This is Bernoulli's equation with $n=2$.
+\\Let $u=y^{1-n}=y^{1-2}=y^{-1}=\frac{1}{y}$ if $y\neq0$
+\\$\Rightarrow y=\frac{1}{u}=u^{-1}$ and $\frac{dy}{dx}=-1u^{-2}\frac{du}{dx}=\frac{-1}{u^2}\frac{du}{dx}$
+\\Substituting in the original equation: $\frac{-1}{u^2}\frac{du}{dx}-\frac{1}{u}=e^x\frac{1}{u^2}$
+\\Multiplying by $-u^2\Rightarrow\frac{du}{dx}+u=-e^x\;[1]$
+\\\\An alternate route: Let $u=y^{1-n}$. Then Bernoulli's equation becomes $\frac{du}{dx}+(1-n)P(x)u=(1-n)f(x)$
+\\$\Rightarrow\frac{du}{dx}-(-1)u=(-1)e^x$
+\\$\frac{du}{dx}+u=-e^x$ (linear in $u$)
+\\\\$I.F.=e^{\int P(x)dx}=e^{\int 1dx}=e^x$
+\\Multiplying [1] by $e^x\Rightarrow e^x\frac{du}{dx}+e^xu=-e^xe^x$
+\\$\frac{d}{dx}(e^xu)=-e^{2x}$
+\\Integrating w.r.t. $x\Rightarrow e^xu=\int -e^{2x}dx\Rightarrow e^xu=\frac{-e^{2x}}{2}+C\Rightarrow u=\frac{-e^{2x}}{2e^x}+\frac{C}{e^x}$
+\\Replace $u=\frac{1}{y}\Rightarrow\frac{1}{y}=-\frac{e^x}{2}+Ce^{-x}$
+
+\subsubsection{Example 2}
+Solve the DEs using an appropriate substitution: $\frac{dy}{dx}-y=e^xy^2,\;y(0)=1$ (note: $y=0$ does not satisfy $y(0)=1$)
+\paragraph{Solution} From example 1: $\frac{1}{y}=\frac{-e^x}{2}+Ce^{-x}$
+\\Set $x=0$ and $y=1\Rightarrow \frac{1}{1}=\frac{-e^0}{2}+Ce^{-0}\Rightarrow1=\frac{-1}{2}+C\Rightarrow C=\frac{3}{2}$
+\\The solution is $\frac{1}{y}=\frac{-e^x}{2}+\frac{3}{2}e^{-x}$
+
+\subsubsection{Example 3}
+Solve the DEs using an appropriate substitution: $xy'-x^5y^{\frac{1}{3}}=3y$
+\paragraph{Solution} $\Rightarrow y'-\frac{x^5}{x}y^{\frac{1}{3}}=\frac{3}{x}y$
+\\$\Rightarrow y'-\frac{3}{x}y=x^4y^{\frac{1}{3}}\;[*]$ This is Bernoulli's equation with $n=\frac{1}{3}$
+\\Let $u=y^{1-n}=y^{1-\frac{1}{3}}=y^{\frac{2}{3}}$
+\\$u'-(\frac{2}{3})\frac{3}{x}u=\frac{2}{3}x^4$
+\\$\frac{du}{dx}-\frac{2}{x}u=\frac{2}{3}x^4\;[2]$ linear equation in $u$
+\\\\$I.F.=e^{\int \frac{-2}{x}dx}=e^{-2\ln|x|}=e^{\ln|x|{^{-2}}}=|x|^{-2}=\frac{1}{x^2}$
+\\Multiply [2] by $\frac{1}{x^2}\Rightarrow \frac{1}{x^2}\frac{du}{dx}-\frac{2}{x}\frac{1}{x^2}u=\frac{2}{3}\frac{1}{x^2}$
+\\$\int\frac{d}{dx}(\frac{1}{x^2}u)dx=\int\frac{2}{3}x^2dx$
+\\$\frac{1}{x^2}u=\frac{2}{3}\frac{x^3}{3}+C\Rightarrow u=\frac{2}{9}x^3x^2+Cx^2$
+\\Replace $u=y^{\frac{2}{3}}\Rightarrow y^{\frac{2}{3}}=\frac{2}{9}x^5+Cx^2$
+
 \subsection{Linear Substition}
+A DE of the form $\frac{dy}{dx}=f(Ax+By+C)$ where $B\neq0$ can be converted to a separable equation by using the substitution $u=Ax+By+C$, then solve the separable equation and replace $u$.
+
+\subsubsection{Example 1}
+Solve the DE by using an appropriate substitution: $\frac{dy}{dx}=2+e^{y-2x+6}$
+\paragraph{Solution} Let $u=y-2x+6\Rightarrow y=u+2x-6$ and $\frac{dy}{dx}=\frac{du}{dx}+2$
+\\Sub into original equation: $\frac{du}{dx}+2=2+e^u\Rightarrow\frac{du}{dx}=e^u\Rightarrow\int\frac{du}{e^u}=\int{dx}\Rightarrow$ separable equation.
+\\$\frac{e^{-u}}{-1}=x+C$, replace $u=y+-2x+6\Rightarrow -e^{-(y-2x+6)}=x+C$
+
+\subsubsection{Example 2}
+Solve the DE by using an appropriate substitution: $\frac{dy}{dx}=\frac{1-x-y}{x+y}$
+\paragraph{Solution} $\Rightarrow \frac{dy}{dx}=\frac{1-(x+y)}{x+y}$, we can have a linear substitution $f(x+y)$
+\\Let $u=x+y\Rightarrow y=u-x$ and $\frac{dy}{dx}=\frac{du}{dx}-1$
+\\Sub into original equation: $\frac{du}{dx}-1=\frac{1-u}{u}\Rightarrow\frac{du}{dx}=1+\frac{1-u}{u}=\frac{u+1-u}{u}=\frac{1}{u}$
+\\$udu=dx$ (cross multiplication of $\frac{du}{dx}=\frac{1}{u}$), so $\int udu=\int dx\Rightarrow$ separable equation
+\\$\frac{u^2}{2}=x+C$
+\\Replace $u=x+y\Rightarrow\frac{(x+y)^2}{2}+x+C$
+\\\\Now, back to the beginning: $\frac{Dy}{dx}=\frac{1-x-y}{x+y}$ is not separable, ont linear, not Bernoulli's equation.
+\\We can check homogeneous and exact$\Rightarrow Mdx+Ndy=0\Rightarrow(x+y)dy=(1-x-y)dx
+\\\Rightarrow(1-x-y)dx-(x+y)dy=0\Rightarrow$ not homogeneous ($1-x-y$ is not homogeneous)
+\\$M=1-x-y$ and $N=-(x+y)\Rightarrow M_y=-1$ and $N_x=-1\Rightarrow$ exact equation.
+\\You can solve by exact equation to get $x-\frac{x^2}{2}-xy-\frac{y^2}{2}=C$
+
+\newpage\section{Real Life Problems}
+Real life problems can be modelled as differential equations (especially first-order DEs). We will discuss this further:
+
+\subsection{Linear Models} Real life applications can be written as 1st order linear DEs (section 2.1 in this document).
+Let's look at some examples:
+
+\subsubsection{Growth and Decay}
+If $P$ is a population at time $t$, then the rate of change of that population is proportional to $P\Rightarrow\frac{dP}{dt}=kP$ where $k>0$
 
 \end{document}

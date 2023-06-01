@@ -6,7 +6,9 @@
 \usepackage{xcolor}
 \geometry{letterpaper, total={170mm,257mm}, left=20mm, top=20mm}
 \graphicspath{ {./images/} }
+\newtheorem{theorem}{Theorem}[section]
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newcommand{\p}{\partial}
 
 \title{Vector Calculus}
 \author{Justin Bornais}
@@ -321,4 +323,162 @@ Evaluate the limit if it exists, or show that the limit DNE. $\Lim{(x,y)\to(0,0)
 \\Along $y=mx\to\Lim{x\to0}\frac{xm^2x^2}{x^2+2m^4x^4}=\Lim{x\to0}\frac{m^2x^3}{x^2(1+2m^4x^2)}=\frac{m^2(0)}{1+2m^4(0)}=\frac{0}{1}=0$
 \\Along $x=y^2$ (or more general, $x=cy^2$)$\to\Lim{y\to0}\frac{y^2y^2}{(y^2)^2+2y^4}=\Lim{y\to0}\frac{y^4}{3y^4}=\textcolor{red}{\frac{1}{3}\neq0}$
 \\Thus the limit DNE.
+
+\newpage\subsection{(14.2) Limits and Continuity}
+A function $f(x,y)$ is continuous at $(a,b)$ if $\Lim{(x,y)\to(a,b)}f(x,y)=f(a,b)$.
+Similarly, for functions with 3 variables, $f(x,y,z)$ is continuous at $(a,b,c)$ if $\Lim{(x,y,z)\to(a,b,c)}f(x,y,z)=f(a,b,c)$
+\\This basically states that a value exists, limit exists and both of them are equal. Every function is continuous on its domain.
+Additionally, polynomials and rational functions are continuous on their domain.
+
+\subsubsection{Example 1}
+Find the points where $f$ is continuous: $f(x,y)=\frac{x+y}{\sqrt{x-1}}$
+\paragraph{Solution} The domain of $f$ is $x-1>0\Rightarrow x>1$
+\\Thus $f$ is continuous on $R^2$ except when $x\leq1$ or $f$ is continous on $\{(x,y)|x>1\}$
+
+\subsubsection{Example 2}
+Find the points where $f$ is continuous: $f(x,y)=\frac{e^y+3}{x^2+y^2}$
+\paragraph{Solution} The domain of $f$ is when $x^2+y^2\neq0$
+\\Thus $f$ is continuous on $R^2$ except at $(0,0)$ (or when $x=0$ and $y=0$)
+\\$f$ is continuous on $\{(x,y)(x,y)\neq(0,0)\}$
+
+\subsubsection{Example 3}
+Find the points where $f$ is continuous: $f(x,y)=\begin{cases}
+    \frac{2x^2+y^2}{x^2+y^2} & \text{if } (x,y)\neq(0,0) \\
+    0 & \text{if } (x,y)=(0,0)
+\end{cases}$
+
+\paragraph{Solution} $f$ is continuous when $(x,y)\neq(0,0)$
+\\Now we check if $f$ is continuous at $(0,0)$ by checking if $\Lim{(x,y)\to(0,0)}f(x,y)=f(0,0)$
+\\First, we know $f(0,0)=0$ exists as a value.
+\\Now, $\Lim{(x,y)\to(0,0)}f(x,y)=\Lim{(x,y)\to(0,0)}\frac{2x^2+y^2}{x^2+y^2}\Rightarrow\frac{0}{0}$
+\\Along $x=0\Rightarrow\Lim{y\to0}\frac{0+y^2}{0+y^2}=\Lim{y\to0}\frac{y^2}{y^2}=\Lim{y\to0}1=1$
+\\Along $y=0\Rightarrow\Lim{x\to0}\frac{2x^2+0}{x^2+0}=\Lim{x\to0}\frac{2x^2}{x^2}=\Lim{x\to0}2=2$
+\\Thus the limit DNE $\Rightarrow$ $f$ is not continuous at (0,0)
+\\$f$ is continuous on $R^2$ except at $(0,0)$
+
+\subsection{(14.3) Partial Derivatives}
+Suppose $y$ is fixed, say $y=b$. Let $g(x)=f(x,b)$ where $b$ is some constant.
+Then $g'(x)=\Lim{h\to0}\frac{g(x+h)-g(x)}{h}$ and $\frac{df}{dx}=\Lim{h\to0}\frac{f(x+h,b)-f(x,b)}{h}$
+\\The 1st order partial derivatives of $f(x,y)$ are: \begin{itemize}
+    \itemsep 0em
+    \item $f_x=\frac{\p f}{\p x}\Rightarrow$ treat $y$ as a constant.
+    \item $f_y=\frac{\p f}{\p y}\Rightarrow$ treat $x$ as a constant.
+\end{itemize}
+
+\subsubsection{Example 1}
+Find the 1st partial derivative of $f(x,y)=y^2\ln{x}+x\sin^2y+y^3$
+\paragraph{Solution} $f_x=\frac{df}{dx}=y^2(\frac{1}{x})+(1)\sin^2y+0=\frac{y^2}{x}+\sin^2y$
+\\$f_y=\frac{df}{dy}=2y\ln{x}+x\cdot2\sin{y}\cos{y}+3y^2$ (note that $\frac{d}{dy}\sin^2y=2\sin{y}\cos{y}$)
+
+\newpage\subsubsection{Example 2}
+Find the 1st partial derivative of $f(r,t)=t^2e^r+\frac{r^2}{t}$
+\paragraph{Solution} $f_r=\frac{df}{dr}=t^2e^r+\frac{2}{t}r$
+\\$f_t=\frac{df}{dt}=2te^r+r^2(-\frac{1}{t^2})$
+
+\subsubsection{Example 3}
+Find the 1st partial derivative of $f(x,y)=\frac{x^2+y}{x+1}$
+\paragraph{Solution} $f_x=\frac{\p f}{\p x}=\frac{(2x)(x+1)-(x^2+y)(1)}{(x+1)^2}$
+or $\frac{2x^2+2x-x^2-y}{(x+y)^2}$ (both answers are acceptable)
+\\$f_y=\frac{\p f}{\p y}=\frac{1}{x+1}(0+1)=\frac{1}{x+1}$
+
+\subsubsection{Example 4}
+Find the 1st partial derivative of $f(x,y,z)=xyz+x^2\ln(2y-z)$
+\paragraph{Solution} $f_x=(1)yz+2x\ln(2y-z)$
+\\$f_y=\frac{\p f}{\p y}=x(1)z+x^2\frac{1}{2y-z}(2)$
+\\$f_z=\frac{\p f}{\p z}=xy(1)+x^2\frac{1}{2y-z}(-1)$
+
+\subsection{Higher Order Derivatives}
+Higher order derivatives can be $\frac{\p}{\p y}(f_x)$ and $\frac{\p}{\p x}(f_x)$,
+or $\frac{\p}{\p x}(f_y)$ and $\frac{\p}{\p y}(f_y)$
+\begin{itemize}
+    \itemsep 0em
+    \item $\frac{\p}{\p y}\left(\frac{\p f}{\p x}\right)=\frac{\p^2f}{\p y \p x}=f_{xy}$
+    \item $\frac{\p}{\p x}\left(\frac{\p f}{\p x}\right)=\frac{\p^2f}{\p x^2}=f_{xx}$
+    \item $\frac{\p}{\p x}\left(\frac{\p f}{\p y}\right)=\frac{\p^2f}{\p x \p y}=f_{yx}$
+    \item $\frac{\p}{\p y}\left(\frac{\p f}{\p y}\right)=\frac{\p^2f}{\p y^2}=f_{yy}$
+\end{itemize}
+
+\subsubsection{Example 1}
+Find all four 2nd order partial derivatives of $f(x,y)=3x^2y^3+5x^4y$
+\paragraph{Solution} $f_x=\frac{\p f}{\p x}=3(2x)y^3+5(4x^3)y=6xy^3+20x^3y$
+\\$f_y=3x^2(3y^2)+5x^4(1)=9x^2y^2+5x^4$
+\\$f_{xx}=6(1)y^3+20(3x^2)y$
+\\$f_{yx}=9(2x)y^2+20x^3$
+\\$f_{xy}=6x(3y^2)+20x^3(1)$ (also the same as $f_{yx}$)
+\\$f_{yy}=9x62(2y)+0$
+
+\subsection{Clairaut's Theorem}
+\begin{theorem}
+    Suppose $f$ is defined on a disk that contains (a,b) and $f_{xy}$ and $f_{yx}$ are continuous on D.
+    Then $f_{xy}(a,b)=f_{yx}(a,b)$
+\end{theorem}
+
+\newpage\subsubsection{More Examples of Partial Derivatives}
+Let $f(x,y)=y\tan2x$, find $f_{xx}$ and $f_{yx}$
+\paragraph{Solution} $f_x=y\sec^22x(2)=2y\sec^2x$
+\\$f_y=(1)\tan2x$
+\\$f_{xx}=2y(2\sec2x)(\sec2x\tan2x)(2)$\qquad$f_{yx}=\sec^22x(2)=f_{xy}$ (since $f_{xy}=f_{yx}$)
+
+\subsubsection{Example 2}
+Given that $f(x,y,z)=3x^3+7xy\cos{z}+x^2y^3$, find $f_{xy}(-1,2,0)$ and $f_{xyz}(-1,2,0)$
+\paragraph{Solution} $f_x=9x^2+7(1)y\cos{z}+2xy^3z$
+\\$f_{xy}=0+7(1)\cos{z}+2x(3y^2)z=7\cos{z}+6xy^2z$
+\\$f_{xy}(-1,2,0)=7\cos0+6(-1)(2)^2(0)=7(1)+0=7$
+\\$f_{xyz}=7(-\sin{z})+6xy^2(1)$
+\\$f_{xyz}(-1,2,0)=7(-\sin0)+6(-1)(2)^2=-24$
+
+\subsection{(14.5) Chain Rule}
+You have seen that if we have to find $y'$ where $y=(x^2+1)^3$, we use the chain rule like so:
+\\Let $u=x^2+1$, then $y=u^3\Rightarrow\frac{du}{dx}=2x,\;\frac{dy}{du}=3u^2$
+\\We need $\frac{dy}{dx}=\frac{dy}{du}\cdot\frac{du}{dx}=3u^2(2x)=3(x^2+1)^2(2x)$
+\\\\Now we can expand on this by examining the different cases of the chain rule: \begin{enumerate}
+    \itemsep 0em
+    \item Let $z=f(x,y)$ be a differentiable function in $x$ and $y$, and $x=g(t)$ and $y=h(t)$ are differentiable functions of $t$.
+            Then, $\frac{dz}{dt}=\frac{\p z}{\p x}\cdot\frac{dx}{dt}+\frac{\p z}{\p y}\cdot{\frac{dy}{dt}}$
+    \item Let $z=f(x,y)$ be a differentiable function of $x$ and $y$ and let $x=g(s,t)$ and $y=h(s,t)$ be differentiable functions of $s$ and $t$.
+            Then, $\frac{\p z}{\p s}=\frac{\p z}{\p x}\cdot\frac{\p x}{\p s}+\frac{\p z}{\p y}\cdot\frac{\p y}{\p s}$
+            and $\frac{\p z}{\p t}=\frac{\p z}{\p x}\cdot\frac{\p x}{\p t}+\frac{\p z}{\p y}\cdot\frac{\p y}{\p t}$
+    \item The general version of the chain rule is as follows: $w=f(x,y,z),\;x=g(s,t,u,r),\;y=h(s,t,u,r)\\z=h(s,t,u,r)$.
+            Then, $\frac{\p w}{\p r}=\frac{\p w}{\p x}\cdot\frac{\p x}{\p r}+\frac{\p w}{\p y}\cdot\frac{\p y}{\p r}+\frac{\p w}{\p z}\cdot\frac{\p z}{\p r}$
+    \item This pattern continues.
+\end{enumerate}
+
+\subsubsection{Example 1}
+Find $\frac{dz}{dt}$ where $z=\sqrt{x^2+y}$, $x=e^{2t}$, $y=\sin{t}$
+\paragraph{Solution} $\frac{dz}{dt}=\frac{\p z}{\p x}\cdot\frac{dx}{dt}+\frac{\p z}{\p y}\cdot\frac{dy}{dt}
+=\frac{x}{\sqrt{x^2+y}}(e^{2t}(2))+\frac{1}{2\sqrt{x^2+y}}(\cos{t})$
+\\More details: $z=(x^2+y)^{\frac{1}{2}},
+\\\frac{\p z}{\p x}=\frac{1}{2}(x^2+y)^{-\frac{1}{2}}\cdot(2x),
+\\\frac{\p z}{\p y}=\frac{1}{2}(x^2+y)^{-\frac{1}{2}}(1)$
+
+\subsubsection{Example 2}
+Find $\frac{dw}{dt}$ where $w=x^2y+y^3\cos{z}$, $x=t^2$, $y=t+1$, $z=t^3$
+\paragraph{Solution} $\frac{dw}{dt}=\frac{\p w}{\p x}\cdot\frac{dx}{dt}+\frac{\p w}{\p y}\cdot\frac{dy}{dt}+\frac{\p w}{\p z}\cdot\frac{dz}{dt}
+=(2x)y(2t)+(x^2+3y^2\cos{z})(1)+y^3(-\sin{z})(3t^2)$
+
+\subsubsection{Example 3}
+Let $z=\frac{x}{y}$, $x=re^t$, $y=4re^{-t}$. Find $z_r$ and $z_t$. (Note: $z_r=\frac{\p z}{\p r}$ and $z_t=\frac{\p z}{\p t}$)
+\paragraph{Solution}
+$\frac{\p z}{\p r}=\frac{\p z}{\p x}\cdot\frac{\p x}{\p r}+\frac{\p z}{\p y}\cdot\frac{\p y}{\p r}
+=\frac{1}{y}(1e^t)+\frac{-x}{y^2}(1e^{-t})$
+\\$\frac{\p z}{\p t}=\frac{\p z}{\p x}\cdot\frac{\p x}{\p t}+\frac{\p z}{\p y}\cdot\frac{\p y}{\p t}
+=\frac{1}{y}(re^t)+\frac{-x}{y^2}(re^{-t}(-1))$
+
+\newpage\subsection{(14.5) Implicit Differentiation}
+If you have an explicit definition of $y$, such as $y=f(x)$, but $y$ is used impllicitly: $F(x,y)=0$,
+then $\frac{dF}{dy}\cdot\frac{dy}{dx}=\frac{-\p F}{\p x}$ and $\frac{dy}{dx}=\frac{\frac{-\p F}{\p x}}{\frac{\p F}{\p y}}$
+or $\frac{dy}{dx}=\frac{-F_x}{F_y}$
+\\\\Similarly with 3 variables: If we have an explicit definition $z=f(x,y)$ but $z$ is used impllicitly: $F(x,y,z)=0$.
+\\Then: $\frac{\p z}{\p x}=-\frac{F_x}{F_z}$ and $\frac{\p z}{\p y}=-\frac{F_y}{F_z}$
+
+\subsubsection{Example 1} Find $\frac{dy}{dx}$ where $x^2y+e^{xy}=9$ using partial derivatives.
+\paragraph{Solution} $\frac{dy}{dx}=\frac{-F_x}{F_y}=-\frac{2xy+e^{xy}(y)}{x^2+e^{xy}(x)}$
+
+\subsubsection{Example 2} Find $\frac{\p z}{\p x}$ and $\frac{\p z}{\p y}$ where $yz=\ln(2x+3z)$
+\paragraph{Solution} The equation becomes $yz-\ln(2x+3z)=0$ (move everything to one side)
+\\We can see $F=yz-\ln(2x+3z)$
+\\$\frac{\p z}{\p x}=-\frac{F_x}{F_z}=-\frac{-\frac{1}{2x+3z}\cdot(2)}{y-\frac{1}{2x+3z}\cdot(3)}$
+or $-\frac{-\frac{2}{2x+3z}}{\frac{y(2x+3z)-3}{2x+3z}}=\frac{2}{2xy+3yz-3}$
+\\$\frac{\p z}{\p y}=-\frac{F_y}{F_z}=-\frac{(1)z}{y-\frac{3}{2x+3z}}$
+
 \end{document}

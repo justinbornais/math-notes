@@ -46,7 +46,69 @@ $y=ax^2-7\Rightarrow y'=2ax$
 \\\Rightarrow (a+4)x^2=0
 \\\Rightarrow a+4=0
 \\\Rightarrow a=-4$
+
+\subsubsection{Question 3}
+Find the value of $c$ such that $y=\frac{1}{x^2+c}$ is a solution to the IVP $y'=-2xy^2;\;y(9)=\frac{1}{15}$
+
+\paragraph{Solution} The condition $y(9)=\frac{1}{15}$ means substituting $x=9$ and $y=\frac{1}{15}$
+into the solution $y=\frac{1}{x^2+c}$ gets us $\frac{1}{15}=\frac{1}{9^2+c}\Rightarrow\frac{1}{15}=\frac{1}{81+c}
+\\\Rightarrow81+c=15\Rightarrow c=15-81=-66$
+
+\subsubsection{Question 4}
+Consider the IVP $(x-1)y'-9y=-8;\;y(1)=1$ Calculate $\frac{\partial f}{\partial y}$
+
+\paragraph{Solution} So $f(x,y)=\frac{-8+9y}{x-1}$ giving $\frac{\partial f}{\partial y}=\frac{9}{x-1}$
+\\Both $f$ and $\frac{\partial f}{\partial y}$ are continuous when $x\neq1$.
+\\But the existence theorem guarantees that the given IVP has a unique solution on an interval in a region.
+
+\subsubsection{Question 5}
+$x^4y'=e^{6x^2+5y^2}$ is or is not separable.
+
+\paragraph{Solution} Well, $\frac{dy}{dx}=\frac{e^{6x^2+5y^2}}{x^4}\Rightarrow \frac{dy}{dx}=\frac{e^{6x^2}}{x^4}\cdot e^{5y^2}$
+\\Thus the equation is separable.
+
+\subsubsection{Question 6}
+Consider the IVP: $y'-8x^9e^{-y}=0;\;y(0)=8$
+\\Find the explicit solution of the IVP.
+
+\paragraph{Solution}
+We first use separation of variables to determine the solution to the DE:
+\\$y'-8x^9e^{-y}=0\Rightarrow \frac{dy}{dx}=8x^9e^{-y}$
+\\$\Rightarrow e^ydy=8x^9dx$
+\\$\int e^ydy=\int8x^9dx$
+\\$e^y=\frac{8x^{10}}{10}+C$
+\\$y=\ln{\left(\frac{8x^{10}}{10}+C\right)}$
+\\\\Imposing the initial condition $y(0)=8\Rightarrow \ln{0+C}=8$
+\\$C=e^8$
+\\\\Thus the solution for the IVP is $y=\ln\left(\frac{8x^{10}}{10}+e^8\right)$
+
+\subsubsection{Question 8}
+What is the integrating factor of the linear differential equation? $xy'-15y=x^{16}$ for $x\in(0,\infty)$
+
+\paragraph{Solution}
+First, in standard form $\Rightarrow y'-\frac{15}{x}y=x^{15}$
+\\Thus $I.F.=e^{\int P(x)dx}=e^{\int -\frac{15}{x}dx}=e^{-15\ln|x|}=e^{(\ln|x|)^{-15}}=\frac{1}{|x|^{15}}=\frac{1}{x^{15}}$ for $x\in(0,\infty)$
    
+\subsubsection{Question 9}
+Which of the following intervals can be an interval of existence of the solution of the linear differential equation:
+$(x-13)y'-12y=(x-12)^3$
+
+\paragraph{Solution}
+To standard form: $y'-\frac{12}{x-13}y=\frac{(x-12)^3}{x-13}$ are continuous.
+\\Thus the interval of existence is $(13,\infty)$
+
+\subsubsection{Question 10}
+Consider the IVP $y'-y=2x;\;y(0)=8$
+Find the explicit solution of the IVP.
+
+\paragraph{Solution}
+The given equation is a linear equation.
+\\$I.F.=e^{\int P(x)dx}=e^{\int -1dx}=e^{-x}$
+\\Multiplying by the I.F. we get $e^{-x}y'-e^{-x}y=2xe^{-x}
+\Rightarrow\frac{d}{dx}(e^{-x}y)=2xe^{-x}$
+\\Integrating both sides W.R.T. x: $e^{-x}y=-2xe^{-x}-2e^{-x}+C\Rightarrow y=-2x-2+Ce^x$
+\\Imposing the initial condition $y(0)=8\Rightarrow 8=0-2+C\Rightarrow C=10$
+\\Thus the explicit solution to the IVP is $y=-2x-2+8e^x$
 
 %\part{} then \chapter then \section then \subsection then \subsubsection
 % then \paragraph then \subparagraph
