@@ -7,6 +7,9 @@
 \geometry{letterpaper, total={170mm,257mm}, left=20mm, top=20mm}
 \graphicspath{ {./images/} }
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newcommand{\p}{\partial}
+\newcommand{\mat}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
+\newcommand{\mathree}[9]{\begin{bmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}}
 
 \title{MATH2780 - Tutorials}
 \author{Justin Bornais}
@@ -106,4 +109,41 @@ Evaluate the limit if it exists, or show that the limit DNE: $\Lim{(x,y,z)\to(0,
 \\However, along $y=0$, $z=x\Rightarrow\Lim{x\to0}\frac{6xx^2}{x^3+0+x^3}=\Lim{x\to0}\frac{6x^3}{2x^3}=3$
 \\Since 2 paths give different limits, the limit DNE.
 
+\section{(14.7) Maximum and Minimum Values}
+In last class, $(a,b)$ is a critical point of $f$ if $f_x(a,b)=0$ and $f_y(a,b)=0$ or if one of $f_x$ and $f_y$ does not exist.
+\\A critical point is a candidate for a maximum or minimum value. To check, we can use the \textbf{Second Derivative Test:}
+Check if $(a,b)$ is a critical point by calculating $D=\begin{bmatrix}
+    f_{xx} & f_{xy} \\
+    f_{xy} & f_{yy}
+\end{bmatrix}$
+\begin{itemize}
+    \itemsep 0em
+    \item If $D(a,b)>0$ and $f_{xx}(a,b)<0$ then there is a local maximum at $(a,b)$.
+    \item If $D(a,b)>0$ and $f_{xx}(a,b)>0$ then there is a local minimum at $(a,b)$.
+    \item If $D(a,b)<0$ then $(a,b)$ is a saddle point.
+\end{itemize}
+
+\subsubsection{Example 1}
+Find the critical points of the function $f(x,y)=2x^3+xy^2+5x^2+y^2$. Classify them as a local max, local min, or a saddle point.
+\\The question could also be: Find the local max and min values of the function.
+
+\paragraph{Solution} The critical points occur where $f_x=0$ and $f_y=0$
+\\$f_x=6x^2+y^2+10x=0\;[1]$
+\\$f_y=2xy+2y=\;[2]\Rightarrow 2y(x+1)=0\Rightarrow y=0$ or $x+1=0\Rightarrow x=-1$
+\\\\If $y=0$ then equation [1] becomes $6x^2+10x=0\Rightarrow2x(3x+5)=0\Rightarrow x=0$ or $3x+5=0\Rightarrow x=\frac{-5}{3}$
+\\Thus we have the critical points $(0,0)$ and $(\frac{-5}{3},0)$
+\\\\If $x=-1$ then equation [1] becomes $6(-1)^2+y^2+10(-1)=0\Rightarrow y^2=4\Rightarrow y=\pm2$
+\\Thus we also have the critical points $(-1,2)$ and $(-1,-2)$
+\\\\$f_{xx}=6(2x)+0+10(1)=12x+10$
+\\$f_{xy}=0+2y+0=2y$
+\\$f_{yy}=2x(1)+2(1)=2x+2$
+\\$D=\mat{f_{xx}}{f_{xy}}{f_{xy}}{f_{yy}}=\mat{12x+10}{2y}{2y}{2x+2}=(12x+10)(2x+2)-4y^2$
+\\\\$D(0,0)=\mat{0+10}{0}{0}{0+2}=20-0=20>0\Rightarrow f_{xx}(0,0)=10>0\Rightarrow$ Local minimum occurs at $(0,0)$.
+\\The local minim value is $f(0,0)=0$
+\\$D(\frac{-5}{3},0)=\mat{12\frac{-5}{3}+10}{0}{0}{2\frac{-5}{3}+2}=\mat{-10}{0}{0}{\frac{-4}{3}}=(-10)(\frac{-4}{3})=\frac{40}{3}>0\Rightarrow f_{xx}(\frac{-5}{3},0)=-10<0$
+\\Thus we have a local max at $(\frac{-5}{3},0)$. The local max value is:
+\\$f(\frac{-5}{3},0)=2(\frac{-5}{3})^3+(\frac{-5}{3})(0)^2+5(\frac{-5}{3})^2+0^2=(\frac{-5}{3})^2(\frac{-10}{3}+5)=\frac{25}{9}(\frac{-10+15}{3})=\frac{25}{9}\cdot\frac{5}{3}=\frac{125}{27}$
+\newpage$D(-1,2)=\mat{12(-1)+10}{2(2)}{2(2)}{2(-1)+2}=\mat{-2}{4}{4}{0}=0-16=-16<0\Rightarrow(-1,2)$ is a saddle point.
+\\$D(-1,-2)=\mat{-2}{-4}{-4}{0}=0-16=-16<0\Rightarrow(-1,-2)$ is a saddle point.
+\\This will be discussed in Chapter 14.7, which is optimization (word problems).
 \end{document}

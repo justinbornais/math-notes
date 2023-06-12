@@ -7,6 +7,9 @@
 \geometry{letterpaper, total={170mm,257mm}, left=20mm, top=20mm}
 \graphicspath{ {./images/} }
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newcommand{\p}{\partial}
+\newcommand{\mat}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
+\newcommand{\mathree}[9]{\begin{bmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}}
 
 \title{MATH2790 - Tutorials}
 \author{Justin Bornais}
@@ -94,4 +97,44 @@ Solve the DE using appropriate substitution: $(x^4+2y^4)dx-xy^3dy=0$
 \\\ln|x|^2-\ln|x^4+y^4|^{\frac{1}{4}}=C
 \\\ln\left(\frac{x^2}{|x^4+y^4|^{\frac{1}{4}}}\right)=C$
 
+\newpage
+\section{Midterm Review}
+The midterm is on June 15th (11:30 AM - 12:50 PM) in the Education Building, room 1101.
+It covers:\begin{itemize}
+    \itemsep 0em
+    \item Chapter 1 (1.1, 1.2) \begin{itemize}
+        \item Find interval of existence of solution, or
+        \item Find a region where an IVP has a unique solution (no solving the equation). Take $y'=f(x,y)$ and check that $f$ and $\frac{\p f}{\p y}$ are continuous on the region containing $(x_0,y_0)$
+        \begin{itemize}
+            \item An example: take $\sqrt{x^2-4}y'=x^5y^2\Rightarrow y'=\frac{x^5y^2}{x^2-4}\Rightarrow$ $y'=f$ is continuous when $x^2+4>0\Rightarrow x>2$ or $x<-2$
+            \item Also $\frac{\p f}{\p y}=\frac{x^5(2y)}{\sqrt{x^2-4}}$, also continuous when $x>2$ or $x<-2$
+            \item Can use region $\{(x,y)|-5\leq x\leq-2, -3\leq y\leq 3\}$
+        \end{itemize}
+    \end{itemize}
+    \item Chapter 2 (2.2-2.5) \begin{itemize}
+        \item You may be given separable equations: $\frac{dy}{dx}=g(x)\cdot h(y)$
+        \item Might be given a linear equation: $y'+P(x)y=f(x)$
+        \item If a question provides an implicit solution and says to find an explicit solution, then simplify this implicit solution to get explicit.
+        \item \textbf{Singular solutions} $\to$ need to check for singular solutions, in the form $\int\frac{d(\text{dependent})}{\dots(=0)}$ \begin{itemize}
+            \item $\frac{dy}{dx}=\frac{y-1}{x}\Rightarrow \int\frac{dy}{y-1}=\int\frac{dx}{x}$ since $x\neq0$ then $x$ is not a solution.
+            \item If $y=1$ then substitue in original equation and check if it satisfies or not.
+        \end{itemize}
+    \end{itemize}
+    \item Chapter 3 (3.1) (Models) \begin{itemize}
+        \item Think about growth/decay, cooling/warming, mixture and circuits.
+    \end{itemize}
+    \item Chapter 4 (4.1 and 4.2) \begin{itemize}
+        \item Think about $W=\mathree{f_1}{f_2}{f_3}{f'_1}{f'_2}{f'_3}{f''_1}{f''_2}{f''_3}$. If $W\neq0$ for all $x$ in $I\Rightarrow$ L.I. Otherwise, L.D.
+        \item Think about reduction of order: $y_2=uy_1$ and homogeneous linear DEs $\Rightarrow u=\int\frac{e^{\int-P(x)dx}}{y^2_1}dx$
+        \item Exact equations $Mdx+Ndy=0$ If $M_y=N_x$ then it is exact. \begin{itemize}
+            \item To solve, $\frac{\p f}{\p x}=M$ and $\frac{\p f}{\p y}=N$ and the solution is $f(x,y)=C$
+            \item The I.F. to make it exact is either $\mu=e^{\int\frac{M_y-N_x}{N}dx}$ with no $y$ or $\mu=e^{\int\frac{N_x-M_y}{M}dy}$ with no $x$.
+        \end{itemize}
+        \item Solve a DE by using appropriate substitution: \begin{itemize}
+            \item Homogeneous DE: $Mdx+Ndy=0$ ($M$ and $N$ are homogeneous of the same degree) $\Rightarrow$ Let $y=ux,dy=udx+xdu$ or let $x=vy,dx=vdy+ydv$, and make them separable.
+            \item Bernoulli's Equation: $y'+f(x)y=f(x)y^n$, $n\in R$, $n\neq0$ and $n\neq1\Rightarrow$ Let $u=y^{1-n}$, $u'+(1-n)P(x)u=(1-n)f(x)\Rightarrow$ a linear equation.
+            \item Linear Substitution: $y'=f(Ax+By+C)\Rightarrow$ Let $u=Ax+By+C\Rightarrow$ separable equation.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
 \end{document}

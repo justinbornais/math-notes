@@ -9,6 +9,9 @@
 \newtheorem{theorem}{Theorem}[section]
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
 \newcommand{\p}{\partial}
+\newcommand{\dg}{^{\circ}}
+\newcommand{\mat}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
+\newcommand{\mathree}[9]{\begin{bmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}}
 
 \title{Differential Equations}
 \author{Justin Bornais}
@@ -442,6 +445,176 @@ Real life problems can be modelled as differential equations (especially first-o
 Let's look at some examples:
 
 \subsubsection{Growth and Decay}
-If $P$ is a population at time $t$, then the rate of change of that population is proportional to $P\Rightarrow\frac{dP}{dt}=kP$ where $k>0$
+If $P$ is a population at time $t$, then the rate of change of that population is proportional to $P\Rightarrow\frac{dP}{dt}\propto P\Rightarrow \frac{dP}{dt}=kP$ where $k>0$
+\\Radioactive elements decay with time. The rate of change of $A$, where $A$ represents the amount of decay,
+is proportional to $A\Rightarrow\frac{dA}{dt}\propto A\Rightarrow\frac{dA}{dt}=kA$ where $k<0$
+
+\subsubsection{Example 1}
+The population of bacteria in a culture grows at a rate proportional to the number of bacteria present at time $t$.
+After 3 hours, it is observed that 10,000 bacteria are present. If the initial population is 2000 bacteria,
+when will the bacteria population reach 17,500?
+\paragraph{Solution} The DE is $\frac{dP}{dt}=kP$ (where $P$ is the population) and the given conditions are $P(0)=2000$ and $P(3)=10,000$
+\\To find $t$ where $P(t)=17,500$: $\frac{dP}{dt}=kP\Rightarrow\frac{dP}{dt}-kP=0$ and we now have a linear equation.
+\\$I.F.=e^{\int -kdt}=e^{-kt}$
+\\$e^{-kt}\frac{dP}{dt}-e^{-kt}kP=e^{-kt}(0)\Rightarrow\int\frac{d}{dt}(e^{-kt}P)dt=\int0dt$
+\\\\Alternate solution: Make separable: $\int\frac{dP}{P}=\int kdt$ if $P\neq0$
+\\$\ln|P|=kt+C\Rightarrow|P|=e^{kt+C}\Rightarrow P=e^{kt}\cdot e^C\Rightarrow P=C_1e^{kt}$
+\\\\Anyways, $e^{-kt}P=C\Rightarrow P=\frac{C}{e^{-kt}}$
+\\$P(0)=2000\Rightarrow2000=Ce^{k(0)}\Rightarrow2000=C\Rightarrow P=2000e^{kt}$
+\\$P(3)=10,000\Rightarrow10000=2000e^{k{3}}\Rightarrow e^{3k}=\frac{10,000}{2000}\Rightarrow\ln{e^{3k}}=\ln5\Rightarrow3k=\ln5\Rightarrow k=\frac{\ln5}{3}\approx0.536$
+\\So, $P=2000e^{0.536t}$
+\\When $P=17,500\Rightarrow17,500=2000e^{0.536t}$
+\\$e^{0.536t}=\frac{17,500}{2000}\Rightarrow\ln{e^{0.536t}}=\ln\frac{175}{20}\Rightarrow0.536t=\ln\frac{175}{20}\Rightarrow t=\frac{\ln\frac{175}{20}}{0.536}\approx4.044$
+\\Therefore, the population will reach 17,500 bacteria a little after 4 hours.
+
+\subsubsection{Example 2}
+A sample of bismuth-210 decays at a rate proportional to the amount present at time $t$.
+If 67\% of its original amount has decayed after 8 days, find the half life of this sample.
+\paragraph{Solution} The DE is $\frac{dA}{dt}=kA$, where $A$ is the amount, given the conditions are $A(8)=\frac{33}{100}A_0$ where $A_0$ is the initial amount.
+\\Reminder: Half-life refers to how long it takes for the substance to reduce to 50\% of its original amount.
+\\From example 1: $A=Ce^{kt}$.
+\\$A_0=Ce^{k(0)}=C(1)\Rightarrow C=A_0$
+\\So $A=A_0e^{kt}$
+\\Now, $A(8)=\frac{33}{100}A_0\Rightarrow\frac{33}{100}A_0=A_0e^{k(8)}$.
+\\Take $\ln\Rightarrow\ln\frac{33}{100}=8k\Rightarrow k=\frac{\ln\frac{33}{100}}{8}\approx-0.139$
+\\We thus have $A=A_0e^{-0.139t}$
+\\When $A=\frac{1}{2}A_0\Rightarrow\frac{1}{2}A_0=A_0e^{-0.139t}\Rightarrow\ln\frac{1}{2}=-0.139t\Rightarrow t=\frac{\ln\frac{1}{2}}{-0.139}\approx4.985$
+
+\newpage\subsubsection{Cooling and Warming} The DE is $\frac{dT}{dt}=k(T-T_m)$ where $T$ is the temperature of the object,
+$t$ is time and $T_m$ is the temperature of the surroundings. Here, $k<0$.
+\begin{itemize}
+    \itemsep 0em
+    \item When $T>T_m\Rightarrow\frac{dT}{dt}<0$ since $T-T_m>0$
+    \item When $T<T_m\Rightarrow\frac{dT}{dt}>0$ since $T-T_m<0$
+\end{itemize}
+
+\subsubsection{Example 3 (from 3.1 \#14)}
+A thermometer is taken from an inside room to the outside, where the air temperature is $5\dg$F.
+After 1 minute, the termperature reads $55\dg$F and after 5 minutes, it reads $30\dg$F.
+What is the initial temperature of the room?
+\paragraph{Solution} The DE is $\frac{dT}{dt}=k(T-T_m)$ given $T(1)=55$ and $T(5)=30$
+\\Since the air temperature is $5\dg$F, then $T_m=5\Rightarrow\frac{dT}{dt}=kT-5k$
+\\$\frac{dT}{dt}-kT=-5k$
+\\$I.F.=e^{\int-kdt}=e^{-kt}$
+\\$e^{-kt}\frac{dT}{dt}-kTe^{-kt}=-5ke^{-kt}$
+\\$\frac{d}{dt}(e^{-kt}T)=-5ke^{-kt}$
+\\Integrating: $e^{-kt}T=\int-5ke^{-kt}dt=-5k\frac{e^{-kt}}{-k}+C=5e^{-kt}+C$
+\\$T=\frac{5e^{-kt}}{e^{-kt}}+\frac{C}{e^{-kt}}\Rightarrow T=5+Ce^{kt}$
+\\\\$T(1)=55\Rightarrow55=5+Ce^{k(1)}\Rightarrow Ce^k=50\;[1]$
+\\$T(5)=30\Rightarrow30=5+Ce^{k(5)}\Rightarrow Ce^{5k}=25\;[2]$
+\\$\frac{Ce^{5k}}{Ce^k}=\frac{25}{50}\Rightarrow e^{4k}=\frac{1}{2}\Rightarrow 4k=\ln\frac{1}{2}\Rightarrow k=\frac{\ln\frac{1}{2}}{4}\approx-0.173287$
+\\Thus equation 1 becomes: $C=50e^{-k}=50e^{-(-0.173287)}\approx59.46$
+\\So, $T=5+59.46e^{-0.173287t}$
+\\At $t=0\Rightarrow T=5+59.46e^0\approx64.46$
+\\Thus, the temperature of the room is $64.46\dg$F.
+
+
+\subsubsection{Mixtures}
+IF $A(t)$ is the amount of salt in a tank, then the DE is $\frac{dA}{dt}=R_{\text{in}}-R_{\text{out}}$
+where $R_{\text{in}}$ is the input rate of salt and $R_{\text{out}}$ is the output rate of salt.
+\\$R_{\text{in}}\Rightarrow$ (the input rate of flow) $\times$ (concentration of salt in solution).
+\\$R_{\text{out}}\Rightarrow$ (the output rate of flow) $\times$ (concentration of salt).
+
+\subsubsection{(3.1) Series Circuits (Section 1.3)}
+We previously covered growth/decay, cooling/warming and mixtures. Now we're covering circuits:
+\begin{itemize}
+    \itemsep 0em
+    \item For LR series, the DE is $L\frac{di}{dt}+Ri=E$, where $L$ is the inductance, $i$ is the current and $R$ is the resistance.
+    \item For RC series, the DE is $R\frac{dq}{dt}+\frac{1}{c}q=F$, where $R$ is the resistance, $q$ is the charge and $c$ is the capacitance.
+\end{itemize}
+
+\subsubsection{Example}
+A 200 volt electromotive force is applied to an RC series circuit in which the resistance is 100 ohms and the capacitance is $5\times 10^{-6}$ Farad.
+Find the charge $q$ on the capacitor if $i(0)=0.4$. Determine the charge as $t\to\infty$. Find current at $t=0.005$ seconds.
+
+\newpage\paragraph{Solution}
+The DE is $R\frac{dq}{dt}+\frac{1}{c}q=E\Rightarrow 1000\frac{dq}{dt}+\frac{1}{5\times10^{-6}}q=200$
+\\$\frac{dq}{dt}+\frac{10^6}{1000(5)}q=\frac{200}{1000}$
+\\$\frac{dq}{dt}+200q=\frac{1}{5}$
+\\$I.F.=e^{\int200dt}=e^{200t}$
+\\\\$e^{200t}\frac{dq}{dt}+200e^{200t}q=\frac{1}{5}e^{200t}$
+\\$\frac{d}{dt}(e^{200t}q)=\frac{1}{5}e^{200t}$
+\\\\Integrating w.r.t. $t\Rightarrow e^{200t}q=\frac{1}{5}\frac{e^{200t}}{200}+C\Rightarrow q=\frac{e^{200t}}{1000e^{200t}}+\frac{C}{e^{200t}}$
+\\$q=\frac{1}{1000}+Ce^{-200t}$
+\\Given the initial condition $i(0)=0.4$, but $i=\frac{dq}{dt}=Ce^{-200t}(-200)$
+\\$i(0)=0.4\Rightarrow0.4=Ce^{-200(0)}(-200)\Rightarrow C=\frac{0.4}{-200}=\frac{-1}{500}$
+\\\textbf{Note:} the $0$ in $i(0)$ is the value of $t$ and the $0.4$ is the value of $i$.
+\\The charge is $q=\frac{1}{1000}-\frac{1}{500}e^{-200t}$
+\\\\$\Lim{t\to\infty}\left(\frac{1}{1000}-\frac{1}{500}e^{-200t}\right)=\frac{1}{1000}$
+\\When $t\to\infty$, then the charge is $\frac{1}{1000}$ coulomb.
+\\The current is $i=\frac{dq}{dt}=\frac{-1}{500}e^{-200t}(-200)$
+\\$i=\frac{2}{5}e^{-200t}$
+\\\\When $t=0.005$, $i=\frac{2}{5}e^{-200(0.005)}=\frac{2}{5}e^{-1}\approx0.1472$ amperes.
+
+\section{(Ch. 4) Higher Order Differential Equations}
+
+\subsection{Linear Differential Equations}
+An nth order linear DE is $a_n(x)\frac{d^ny}{dx^n}+a_{n-1}(x)\frac{d^{n-1}y}{dx^{n-1}}+\dots+a_1(x)\frac{dy}{dx}+a_0(x)y=g(x)$
+\\For IVPs: $y(x_0)=y_0, y'(x_0)=y_1,\dots,y^{(n-1)}(x_0)=y_{n-1}\Rightarrow$ you need $n$ conditions for an nth order DE.
+
+\subsubsection{Example 1}
+Given that $y=c_1+c_2\cos{x}+c_3\sin{x}$ is a solution of the DE $y'''+y'=0$ on the interval $(-\infty, \infty)$,
+find the solution subject to the conditions: $y(\pi)=0$, $y'(\pi)=2$ and $y''(\pi)=-1$
+
+\paragraph{Solution} $y(\pi)=0\Rightarrow0=c_1+c_2\cos\pi+c_3\sin\pi\Rightarrow c_1-c_2=0\;[1]$
+\\$y'=c_2(-\sin{x})+c_3\cos{x}$
+\\$y'(\pi)=2\Rightarrow2=c_2(-\sin\pi)+c_3\cos\pi\Rightarrow2=-c_3\Rightarrow c_3=-2$
+\\$y''=c_2(-cos{x})+c_3(-\sin{x})$
+\\$y''(\pi)=-1\Rightarrow-1=c_2(-\cos\pi)+c_3(-\sin\pi)\Rightarrow -1=c_2$
+\\From [1], $c_1=c_2=-1$
+\\Thus the solution is $y=-1-\cos{x}-2\sin{x}$
+
+\subsection{Existence and Uniqueness Theorem for IVPs}
+Consider the IVP: $a_n(x)y^{(n)}+a_{n-1}(x)y^{(n-1)}+\dots+a_1(x)y'+a_0(x)y=g(x)$ subject to $y(x_0)=y_0,\dots,y^{(n-1)}(x_0)=y_{n-1}$.
+If $a_0(x)$, $a_1(x)$, $\dots$, $a_n(x)$ and $g(x)$ are continuous on an interval containing $x_0$ and $a_n(x)\neq0$ for any $x$ in the interval,
+then the IVP has a unique solution.
+\\\\Back in section 2.3 of the textbook, we covered first-order DEs had to be written in standard form: $a_1y'+a_0y=g(x)\Rightarrow y'+\frac{a_0}{a_1}y=\frac{g(x)}{a_1}$
+where $\frac{a_0}{a_1}=P(x)$ and $\frac{g(x)}{a_1}=f(x)$, where $P(x)$ and $f(x)$ had to be continuous. This is a similar situation but for higher order DEs.
+
+\newpage\subsubsection{Example}
+Find an interval centered about $x=0$ for which the IVP has a unique solution: $(x-1)y''+(\sec x)y=e^x;\;y(0)=3,\:y'(0)=1$
+
+\paragraph{Solution} $a_2=(x-1)$ and $e^x$ are continuous on $R$, while $a_0=\sec x=\frac{1}{\cos x}$ is continuous on $(\frac{-\pi}{2},\frac{\pi}{2})$
+\\Thus the interval where the DE is continuous is $(\frac{-\pi}{2},\frac{\pi}{2})$
+\\$a_2\neq0\Rightarrow x-1\neq0\Rightarrow x\neq1$
+\\Because of that, the largest interval is $(-1,1)$
+
+\subsubsection{Linear Dependence/Independence}
+A set of functions $f_1,f_2,\dots,f_n$ are \textbf{linearly dependent} on I if there exists constants
+$c_1,c_2,\dots,c_n$ where not all of them are 0 and $c_1f_1+c_2f_2+\dots+c_nf_n=0$
+\\\\The \textbf{wronskian} of $f_1,f_2,\dots,f_n$ is $W=\begin{bmatrix}
+    f_1 & f_2 & \dots & f_n \\
+    f'_1 & f'_2 & \dots & f'_n \\
+    f''_1 & f''_2 & \dots & f''_n \\
+    \vdots & \ddots \\
+    f^{(n-1)}_1 & \dots && f^{(n-1)}_n
+\end{bmatrix}$
+\\$f_1,f_2,\dots,f_n$ are linearly independent on an interval iff $W\neq0$ for all $x$ in $I$.
+
+\subsubsection{Example 1} Determine wheter the function is linearly independent: $f_1(x)=e^x,f_2(x)=e^{-x}$ on the interval $(-\infty,\infty)$
+\paragraph{Solution} $W=\begin{bmatrix}
+    f_1 & f_2 \\
+    f'_1 & f'_2
+\end{bmatrix}=\begin{bmatrix}
+    e^x & e^{-x} \\
+    e^x & -e^{-x}
+\end{bmatrix}=-e^xe^{-x}-e^{-x}e^x=-1-1=-2\neq0$
+\\Thus the functions are linearly independent.
+
+\subsection{Fundamental Set of Solutions}
+$y_1,y_2,\dots,y_n$ are the fundamental set of solutions of an nth order DE on I if: \begin{enumerate}
+    \item $y_1,y_2,\dots,y_n$ satisfy the DE on I, and
+    \item $y_1,y_2,\dots,y_n$ are linearly independent (l.i.) on I.
+\end{enumerate}
+
+\subsubsection{Example}
+Show that $y_1=\cos5x$ and $y_2=\sin5x$ are fundamental set of solutions of the DE $y''+25y=0$
+\paragraph{Solution} $W=\begin{bmatrix}
+    \cos5x & \sin5x \\
+    (-\sin5x)(5) & 5\cos5x
+\end{bmatrix}=5\cos^25x+5\sin^25x=5(\cos^25x+\sin^25x)=5\neq0\Rightarrow$ l.i.
+\\$y=\cos5x,y'=-5\sin5x,y''=-25\cos5x\Rightarrow -25\cos5x+25\cos5x=0\Rightarrow0=0$
+\\$y=\sin5x,y'=5\cos5x,y''=-25\sin5x\Rightarrow -25\sin5x+25\sin5x=0\Rightarrow0=0$
+\\So $y_1,y_2$ are fundamental set of solutions.
 
 \end{document}
