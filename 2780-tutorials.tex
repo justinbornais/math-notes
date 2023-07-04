@@ -8,8 +8,18 @@
 \graphicspath{ {./images/} }
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
 \newcommand{\p}{\partial}
+\newcommand{\dg}{^{\circ}}
+\newcommand{\tri}{\vec{\bigtriangledown}}
 \newcommand{\mat}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
 \newcommand{\mathree}[9]{\begin{bmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}}
+\newcommand{\der}[2]{\frac{d #1}{d #2}}
+\newcommand{\pat}[2]{\frac{\partial #1}{\partial #2}}
+\newenvironment{ind}[1]
+ {\begin{list}{}
+         {\setlength{\leftmargin}{#1}}
+         \item[]
+ }
+ {\end{list}}
 
 \title{MATH2780 - Tutorials}
 \author{Justin Bornais}
@@ -146,4 +156,41 @@ Find the critical points of the function $f(x,y)=2x^3+xy^2+5x^2+y^2$. Classify t
 \newpage$D(-1,2)=\mat{12(-1)+10}{2(2)}{2(2)}{2(-1)+2}=\mat{-2}{4}{4}{0}=0-16=-16<0\Rightarrow(-1,2)$ is a saddle point.
 \\$D(-1,-2)=\mat{-2}{-4}{-4}{0}=0-16=-16<0\Rightarrow(-1,-2)$ is a saddle point.
 \\This will be discussed in Chapter 14.7, which is optimization (word problems).
+
+\section{Maximum and Minimum}
+\subsubsection{Example 1}
+Find the dimension of the rectangular box with the largest volume if the total surface area is 64cm$^2$.
+\paragraph{Solution} We have to maximize $V=xyz\;[1]$
+subject to $SA=2xy+2yz+2xz=64\Rightarrow xy+yz+xz=32\;[2]$
+\\In last class, we used Lagrange multipliers to find the maximum of the volume ($f(x,y,z)$) subject to the surface area ($g(x,y,z)$).
+\\\\Alternate method: From equation 2: $yz+xz=32-xy$
+\\$z(y+x)=32-xy$
+\\$z=\frac{32-xy}{y+x}$
+\\Sub $z$ into equation 1: $V=xy\left(\frac{32-xy}{x+y}\right)$
+\\We now have to maximize $f(x,y)=\frac{32xy-x^2y^2}{x+y}$, $x>0$, $y>0$, $z\geq0\Rightarrow xy\leq32$
+\\Critical points: $f_x=0$ and $f_y=0$.
+\\$f_x=\frac{(x+y)(32y-2xy^2)-(32xy-x^2y^2)(1)}{(x+y)^2}=\frac{32xy+32y^2-2x^2y^2-2xy^3-32xy+x^2y^2}{(x+y)^2}
+=\frac{32y^2-x^2y^2-2xy^3}{(x+y)^2}=0
+\\\Rightarrow y^2(32-x^2-2xy)=0\;[3]$
+\\Similarly, $f_y=\frac{32x^2-y^2x^2-2yx^3}{(x+y)^2}=0\Rightarrow x^2(32-y^2-2xy)=0\;[4]$
+\\\\From equation 3: $y^2=0$ or $32-x^2-xy=0$.
+\\$y^2=0\Rightarrow y=0$ which is not in the domain.
+\\So we have $32-x^2-xy=0\Rightarrow2xy=32-x^2\Rightarrow y=\frac{32-x^2}{2x}$
+\\Substitute $y$ in equation 4: $x^2\left[32-\left(\frac{32-x^2}{2x}\right)^2-2x\left(\frac{32-x^2}{2x}\right)\right]=0$
+\\We get $32-\frac{1024-64x^2+x^4}{4x^2}-(32-x^2)=0\Rightarrow32-\frac{1024-64x^2+x^4}{4x^2}-32+x^2=0$
+\\$\Rightarrow-1024+64x^2-x^4+4x^4=0
+\\\Rightarrow 3x^4+64x^2-1024=0$ Let $x^2=t$
+\\$3t^2+64t-1024=0$
+\\$t=\frac{-64\pm\sqrt{64^2-5(3)(-1024)}}{2(3)}=\frac{32}{3}$ or $\frac{-192}{6}$
+\\Thus $x^2=\frac{32}{3}$ or $\frac{-192}{6}$, but $x>0$ so we only consider the first solution.
+\\Thus $x=\sqrt{\frac{32}{3}}$. Do not consider the negative square root since $x>0$.
+\\Then \Large$y=\frac{32-x^2}{2x}=\frac{32-\frac{32}{3}}{2\sqrt{\frac{32}{3}}}=\frac{2(\frac{32}{3})}{2\sqrt{32}{3}}=\sqrt{\frac{32}{3}}$
+\\\normalsize Then \Large$z=\frac{32-\sqrt{\frac{32}{3}}\sqrt{\frac{32}{3}}}{\sqrt{\frac{32}{3}}+\sqrt{\frac{32}{3}}}=\frac{32-\frac{32}{3}}{2\sqrt{\frac{32}{3}}}
+=\frac{2(\frac{32}{3})}{\sqrt{\frac{32}{3}}}=\sqrt{\frac{32}{3}}$\normalsize
+\\\\Thus \Large$V=\frac{32\sqrt{\frac{32}{3}}\sqrt{\frac{32}{3}}-\left(\sqrt{\frac{32}{3}}\right)\left(\sqrt{\frac{32}{3}}\right)}{\sqrt{\frac{32}{3}}+\sqrt{\frac{32}{3}}}$
+$=\frac{32\left(\frac{32}{3}\right)-\left(\frac{32}{3}\right)^2}{2\sqrt{\frac{32}{3}}}$
+$=\frac{\frac{32}{3}\left(32-\frac{32}{3}\right)}{2\sqrt{\frac{32}{3}}}$
+$=\frac{\frac{32}{3}\left(2\left(\frac{32}{3}\right)\right)}{2\sqrt{\frac{32}{3}}}$
+$=\frac{32}{3}\sqrt{\frac{32}{3}}$\normalfont
+
 \end{document}

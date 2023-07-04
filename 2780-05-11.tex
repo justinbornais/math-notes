@@ -10,9 +10,21 @@
 \newtheorem{theorem}{Theorem}[section]
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
 \newcommand{\p}{\partial}
+\newcommand{\dg}{^{\circ}}
 \newcommand{\tri}{\vec{\bigtriangledown}}
 \newcommand{\mat}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
 \newcommand{\mathree}[9]{\begin{bmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}}
+\newcommand{\der}[2]{\frac{d #1}{d #2}}
+\newcommand{\pat}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\eval}[2]{\bigg|_{#1}^{#2}}
+\newenvironment{ind}[1]
+ {\begin{list}{}
+         {\setlength{\leftmargin}{#1}}
+         \item[]
+ }
+ {\end{list}}
 
 \title{Vector Calculus}
 \author{Justin Bornais}
@@ -552,6 +564,324 @@ Find the directional derivative of $f(x,y)=\ln(x^2+y^2)$ at $P(2,1)$ in the dire
 \\The value of $\cos\theta$ is $1$ when $\theta=0$.
 \\Thus the maximum rate of change is $|\tri f|$ and it occurs in the direction of $\vec{u}$.
 
+\newpage \subsection{(14,6) Tangent Plane for Implicit Functions}
+If a surfacae is given by $F(x(t),y(t),z(t))=K$ where $K$ is some constant, then
+\\$\der{F}{t}=\tri F\cdot r'(t)=\der{F}{x}\cdot\der{x}{t}+\der{F}{y}\cdot\der{y}{t}+\der{F}{z}\cdot\der{z}{t}=0$
+where $\tri F$ is the normal to the tangent plane (so we define the tangent plane using $\tri F$ and some point P ($x_0,y_0,z_0$) or $(x(0),y(0),z(0))$).
+\\\\Also, $F_x(x_0,y_0,z_0)(x-x_0)+F_y(x_0,y_0,z_0)(y-y_0)+F_z(x_0,y_0,z_0)(z-z_0)=0$
 
+\subsection{(14.7) Maximum and Minimum}
+\begin{itemize}
+    \itemsep 0em
+    \item A function $f(x,y)$ has a local maximum at $(a,b)$ if $f(x,y)\leq f(a,b)$ for all nearby values of $x$ and $y$.
+    \item A function $f(x,y)$ has a local minimum at $(a,b)$ if $f(x,y)\geq f(a,b)$ for all nearby values of $x$ and $y$.
+    \item The point $(a,b)$ is a critical minimum if $f_x(a,b)=0$ and $f_y(a,b)=0$, or if $f_x$ and $f_y$ do not exist.
+\end{itemize}
+\subsubsection{Example 1}
+Determine the critical values of $f(x,y)$: $f(x,y)=x^2+y^2$
+\paragraph{Solution} $f_x=2x$ and $f_y=2y$. $\Rightarrow f_x(0,0)=2(0)=0=f_y(0,0)$
+\\Thus $(0,0)$ is a critical minimum.
+
+\subsubsection{Example 2}
+Determine the critical values of $f(x,y)$: $f(x,y)=y^2-x^2$
+\paragraph{Solution} $f(x,y)$ has a saddle point, but is it a local minimum or maximum?
+\\To answer this, we will perform the second derivative test.
+\\$D=\mat{f_{xx}}{f_{xy}}{f_{xy}}{f_{yy}}=f_{xx}\cdot f_{yy}-(f_{xy})^2$
+\begin{itemize}
+    \itemsep 0em
+    \item If $D(a,b)$ is positive and $f_{xx}(a,b)$ is negative, then $(a,b)$ is a local minimum and concave down.
+    \item If $D(a,b)$ is positive and $f_{xx}(a,b)$ is positive, then $(a,b)$ is a local minimum.
+    \item If $D(a,b)$ is negative, then $f(a,b)$ is a saddle point.
+    \item If $D(a,b)=0$ then it is inconclusive.
+\end{itemize}
+
+\subsubsection{Example 3}
+Find the critical points of the function $f(x,y)=x^3-12xy+8y^3$. Classify them as local min, max, or saddle point.
+\paragraph{Solution} $f_x=3x^2-12y=0\;[1]$ and $f_y=-12x+24y^2=0\;[2]$
+\\Equation [1] gives us $12y=3x^2\Rightarrow y=\frac{x^2}{4}$.
+\\Substituting these results into [2]: $-12x+24(\frac{x^2}{4})^2=0\Rightarrow -12x+24\frac{x^4}{16}=0$
+\\$-12x+\frac{3x^4}{2}=0\Rightarrow -24x+3x^4=0\Rightarrow 3x(-8+x^3)=0\Rightarrow x=0$ and $x^3=8\Rightarrow x=2$
+\\When $x=0,y=\frac{0}{4}=0\Rightarrow(0,0)$
+\\When $x=2,y=\frac{2^2}{4}=1\Rightarrow(2,1)$
+\\$D=\mat{f_{xx}}{f_{xy}}{f_{xy}}{f_{yy}}=\mat{6x}{-12}{-12}{48y}$
+\\$D(0,0)=\mat{0}{-12}{-12}{0}=0-(-12)(-12)=-144<0\Rightarrow(0,0)$ is a saddle point.
+\\$D(2,1)=\mat{12}{-12}{-12}{48}=(12)(14)-(-12)(-12)=12(48-12)=12(36)=432>0$
+\\$f_{xx}(2,1)=12>0$, so we have a local minimum at $(2,1)$.
+\\\\\textbf{Note:} we could have also isolated values of $y$, and we would've found $y=0$ and $y=1$. Using those values,
+we would get $x=0$ and $x=2$. Be aware that you can do it either order, whichever is mathematically easier to calculate.
+
+\newpage\subsection{(14.7) Optimization Problems}
+Optimization problems describe real-life problems. Here, we need to find absolute minimums and maximums.
+For optimization problems, \textbf{read carefully}. Assign symbols to different quantities, decide the objective function
+(the function that has to be maximized or minimized).
+
+If the objective function has 3 variables, then we eliminate one of the variables (primarily $z$)
+using the \textbf{constraint} (any condition). Find the domain of the object function, then find critical
+points and decide between a max or a min, based on what is asked.
+
+\subsubsection{Example}
+Find the points on the plane $x-y+z=4$ that is closest to the point $(1,2,3)$.
+\paragraph{Solution} Let $(x,y,z)$ be any point on the plane $x-y+z=4$.
+\\The distance from $(x,y,z)$ to $(1,2,3)$ is $d=\sqrt{(x-1)^2+(y-2)^2+(z-3)^2}$
+\\To make calculations easier, we will minimize $d^2:$
+\\$f(x,y,z)=(x-1)^2+(y-2)^2+(z-3)^2$
+\\Substitute $z=4-x+y$: $f(x,y)=(x-1)^2+(y-2)^2+(4-x-y-3)^2$
+\\Minimizing: $f(x,y)=(x-1)^2+(y-2)^2+(1-x-y)^2$ where $(x,y)\in R$
+\\\\Critical points: $f_x=0\Rightarrow 2(x-1)(1)+2(1-x-y)(-1)=0\Rightarrow 2(x-1-1+x-y)=0$
+\\$f_y=0\Rightarrow 2(y-2)(1)+2(1-x+y)(1)=0\Rightarrow 2(y-2+1-x+y)=0$
+\\$2x-y-2=0\Rightarrow 2x-y=2\;[1]$
+\\$2y-x-1=0\Rightarrow -x+2y=1\;[2]$
+\\Multiply [2] by 2 and adding to 1:
+\\$2x-1=2
+\\-2x+4y=2
+\\\Rightarrow 3y=4\Rightarrow y=\frac{4}{3}$
+\\Substitute into [1] $\Rightarrow 2x-\frac{4}{3}=2\Rightarrow2x=2+\frac{4}{3}=\frac{10}{3}\Rightarrow x=\frac{5}{3}$
+\\And $z=4-x+y=4-\frac{5}{3}+\frac{4}{3}=\frac{12-5+4}{3}=\frac{11}{3}$
+\\Thus we have the point $(\frac{5}{3},\frac{4}{3},\frac{11}{3})$
+\\By the geometry of the problem, the maximum distance will be infinite, so $(\frac{5}{3},\frac{4}{3},\frac{11}{3})$ is the closest point.
+\\\\\textbf{Note:} $D=\mat{2}{-1}{-1}{2}=4-1=3>0$ and $f_{xx}=2>0\Rightarrow$ the point is also a local minimum.
+\\Since there is only one critical point and it is a local minimum, it will be an absolute minimum.
+
+\subsection{Lagrange Multipliers}
+To find the absolute max and min values of $f(x,y)$ or $f(x,y,z)$ subject to a constraint $g(x,y)=k$ or $g(x,y,z)=k$,
+the normal vectors are $\tri f$ and $\tri g$.
+\\At the max and min values, the normal vectors would be parallel: $\tri f=\lambda\tri g$, where $\lambda$ is a scalar called a \textbf{Lagrange multiplier}.
+Follow these steps:\begin{enumerate}
+    \itemsep 0em
+    \item Solve the equations: \begin{itemize}
+        \itemsep 0em
+        \item For two variable functions: $f_x=\lambda g_x$, $f_y=\lambda g_y$, $g(x,y)=k$
+        \item For three variable functions: $f_x=\lambda g_x$, $f_y=\lambda g_y$, $f_z=\lambda g_z$, $g(x,y,z)=k$
+    \end{itemize}
+    \item Evaluate $f$ at all points obtained in step 1. The largest value of $f$ is the absolute max and the smallest value will be the absolute min.
+\end{enumerate}
+
+\newpage\subsubsection{Example 1}
+Find the maximum and minimum values of the function: $f(x,y)=2x^2+3y^2-4x-5$ subject to $x^2+y^2=16$ (or $g(x,y)=x^2+y^2$).
+\paragraph{Solution} $f_x=\lambda g_x\Rightarrow 4x-4=\lambda(2x)\;[1]$
+\\$f_y=\lambda g_y\Rightarrow 6y=\lambda(2y)\;[2]$
+\\$g(x,y)=k\Rightarrow x^2+y^2=16\;[3]$
+\\\\From equation 2: $6y=2\lambda y\Rightarrow (6y-2\lambda y)=0\\\Rightarrow2y(3-\lambda)=0\Rightarrow y=0$ or $\lambda=3$
+\\When $y=0$, equation 3 becomes: $x^2+0=16\Rightarrow x^2=16\Rightarrow x=\pm4\Rightarrow(4,0)$ and $(-4,0)$.
+\\\\When $\lambda=3$, equation 1 becomes: $4x-4=3(2x)\Rightarrow -4=2x\Rightarrow x=-2$
+\\For $x=-2$, equation 3 becomes: $(-2)^2+y^2=16\Rightarrow y^2=12\Rightarrow y=\pm\sqrt{12}\Rightarrow(-2,\sqrt{12})$ and $(-2,-\sqrt{12})$.
+\\\\Now plug and play:
+\\$f(4,0)=2(4)^2+3(0)^2-4(4)-5=32-16-5=11$
+\\$f(-4,0)=2(-4)^2+3(0)^2-4(-4)-5=32+16-5=43$
+\\$f(-2,\sqrt{12})=2(-2)^2+3(\sqrt{12})^2-4(-2)-5=8+36+8-5=47$
+\\$f(-2,-\sqrt{12})=2(-2)^2+3(\sqrt{12})^2-4(-2)-5=8+36+8-5=47$
+\\From this, the minimum is 11 and the absolute max is 47.
+
+\subsubsection{Example 2}
+Use Lagrange multipliers to find the point(s) o the plane $x-y+z=4$ which is closest to the point $(1,2,3)$.
+\paragraph{Solution} In the last class, we did (let $(x,y,z)$ be any point on the plane, then we had to minimize \\$d=\sqrt{(x-1)^2+(y-2)^2+(z-3)^2}$,
+then we made calculations easier by creating the objective function $f(x,y,z)=(x-1)^2+(y-2)^2+(z-3)^2$).
+\\\\Now, with Lagrange multipliers, we have to find the minimum of $f(x,y,z)=(x-1)^2+(y-2)^2+(z-3)^2$ subject to $x-y+z=4$ (or $g(x,y,z)=x-y+z$).
+\\$f_x=\lambda g_x\Rightarrow2(x-1)=\lambda(1)\;[1]\;\Rightarrow x-1=\frac{\lambda}{2}\Rightarrow x=\frac{\lambda}{2}+1$
+\\$f_y=\lambda g_y\Rightarrow2(y-2)=\lambda(-1)\;[2]\;\Rightarrow y-2=\frac{-\lambda}{2}\Rightarrow y=\frac{-\lambda}{2}+2$
+\\$f_z=\lambda g_z\Rightarrow3(z-3)=\lambda(1)\;[3]\;\Rightarrow z-3=\frac{\lambda}{2}\Rightarrow z=\frac{\lambda}{2}+3$
+\\$g(x,y,z)=k\Rightarrow x-y+z=4\;[4]$
+\\\\Subbing the values of $x$, $y$ and $z$ into equation 4 yields: $(\frac{\lambda}{2}+1)-(\frac{-\lambda}{2}+2)+(\frac{\lambda}{2}+3)=4$
+\\$\frac{\lambda}{2}+1+\frac{\lambda}{2}-2+\frac{\lambda}{2}+3=4$
+\\$\Rightarrow \frac{3\lambda}{2}=4-2=2\Rightarrow\lambda=\frac{4}{3}$
+\\For $\lambda=\frac{4}{3}$, we have: \begin{ind}{3cm}
+    $x=\frac{\lambda}{2}+1=\frac{2}{3}+1=\frac{5}{3}
+    \\y=\frac{-\lambda}{2}+2=\frac{-2}{3}+2=\frac{4}{3}
+    \\z=\frac{\lambda}{2}+3=\frac{2}{3}+3=\frac{11}{3}$
+\end{ind}
+By the geometry of the problem, the farthest point will be infinite, so $(\frac{5}{3},\frac{4}{3},\frac{11}{3}$) is the closest point.
+
+\newpage\subsubsection{Example 3}
+Find the dimensions of the rectangular box with the largest volume if the total surface area is given as 64cm$^2$.
+\\(If 64cm$^2$ of material is available to make a rectangular box, find the largest possible volume of the box.)\
+
+\paragraph{Solution} Let $x$, $y$, $z$ be the length, width and height of the box respectively.
+We have to minimize the volume: $V=xyz,\;x\geq0,\;y\geq0,\;z\geq0$
+subject to the surface area $SA=64\Rightarrow xy+xy+yz+yz+xz+xz=64$
+\\$\Rightarrow 2xy+2yz+2xz=64\Rightarrow xy+yz+xz=32$
+\\\\For the Lagrange multipliers, we have to maximize $f(x,y,z)=xyz$ subject to $xy+yz+xz=32$, where $f(x,y,z)=V$ and $g(x,y,z)=xy+yz+xz$.
+\\$f_x=\lambda g_x\Rightarrow yz=\lambda(y+z)\;[1]$
+\\$f_y=\lambda g_y\Rightarrow xz=\lambda(x+z)\;[2]$
+\\$f_z=\lambda g_z\Rightarrow xy=\lambda(y+x)\;[3]$
+\\$g(x,y,z)=k\Rightarrow xy+yz+xz=32\;[4]$
+\\\\Multiply [1] by $x\Rightarrow xyz=\lambda(xy+xz)$
+\\Multiply [2] by $y\Rightarrow xyz=\lambda(xy+zy)$
+\\Equating them: $\lambda(xy+xz)=\lambda(xy+zy)$
+\\$\lambda(xy+xz-xy-zy)=0$
+\\$\lambda(xz-zy)=0$
+\\$\lambda z(x-y)=0\Rightarrow \lambda=0,\;z=0,\;x=y$
+\\When $\lambda=0$, equations [1], [2] and [3] give $x=0$ or $y=0$ or $z=0\Rightarrow V=0$
+\\When $z=0$, then $V=0$.
+\\\\Alternate path to these results:
+\\Equation [1] becomes $\lambda=\frac{yz}{y+z}$ if $y+z\neq0$, $y+z=0$ if $y=0$ and $z=0$.
+\\Equation [2] becomes $\lambda=\frac{xz}{x+z}$ if $x+z\neq0$, $x+z=0$ if $x=0$ and $z=0$.
+\\Equate: $\frac{yz}{y+z}=\frac{xz}{x+z}\Rightarrow xyz+xz^2=xyz+yz^2\Rightarrow xz^2+yz^2=0\Rightarrow x^2(x-y)=0$
+\\Also gives $z=0$ and $x=y$.
+\\\\Obviously $z\neq0$ because that would have the opposite effect we're trying to have! We want to \textbf{maximize} the volume.
+\\Multiply [3] by $z\Rightarrow xyz=\lambda(yz+xz)$
+\\Equating [2] and the above: $\lambda(xy+zy)=\lambda(yz+xz)\Rightarrow \lambda(xy-xz)=0\Rightarrow\lambda x(y-z)=0$
+\\$\lambda=0$ (already done), $x=0$, $z=y$.
+\\When $x=0$, then $V=0$.
+\\\\However, sub in $x=y$ and $z=y$ to get $yy+yy+yy=32\Rightarrow 3y^2=32\Rightarrow y^2=\frac{32}{3}\Rightarrow y=\sqrt{\frac{32}{3}}$
+\\Note: $y$ cannot be negative.
+\\We thus have $x=y=z=\sqrt{\frac{32}{3}}$
+\\Thus $V=\sqrt{\frac{32}{3}}\sqrt{\frac{32}{3}}\sqrt{\frac{32}{3}}=(\sqrt{\frac{32}{3}})^3$cm$^3$.
+
+\newpage
+\section{(Chapter 15) Multiple Integrals}
+A reminder about integrals: an integral is only with respect to one variable.
+So $\Int{a}{b}f(x)dx$ is valid, but $\Int{a}{b}f(x)dy$ is not.
+
+\subsection{(15.1) Double Integrals Over Rectangles}
+We have \Large$\int\Int{R}{}f(x,y)dA=\Lim{m,n\to\infty}\Sum{i=1}{n}\Sum{j=1}{m}f(x_i,y_j)\Delta x\Delta y$
+\normalsize where: \\$R=\{(x,y)|a\leq x\leq b,\;c\leq y\leq d\}$
+
+\subsubsection{Iterated Integral}
+Again we have $R=\{(x,y)|a\leq x\leq b,\;c\leq y\leq d\}$ where $a,b,c,d$ are constants.
+\\\Large$\int\Int{R}{}f(x,y)dA=\Int{x=a}{b}\left(\Int{y=c}{d}f(x,y)dy\right)dx$ \normalsize where $dA=dxdy$ or $dA=dydx$
+and $\left(\Int{y=c}{d}f(x,y)dy\right)$ is the partial integration w.r.t. $y$ (treat $x$ as a constant).
+
+\paragraph{Alternate:} $\int\Int{R}{}f(x,y)dA=\Int{y=c}{d}\Int{x=a}{b}f(x,y)dx\;dy$, where $\Int{x=a}{b}f(x,y)dx$ is the partial integration w.r.t. $x$ (treat $y$ as a constant).
+\\\\\textbf{Clairaut's theorem} states $f_{xy}=f_{yx}$
+\\Similarly, we have \textbf{Fubinacci's theorem} stating:
+$\Int{y=c}{d}\Int{x=a}{b}f(x,y)dx\;dy=\Int{x=a}{b}\Int{y=c}{d}f(x,y)dy\;dx$
+\\We can decide the order to make our calculations easier.
+
+\subsubsection{Example 1}
+Evaluate $\Int{0}{1}\Int{1}{2}\frac{xe^x}{y}dy\;dx$
+\paragraph{Solution} $\Int{0}{1}\Int{1}{2}\frac{xe^x}{y}dy\;dx=\left(\Int{0}{1}xe^xdx\right)\left(\Int{1}{2}\frac{1}{y}dy\right)$ (treated the $x$ terms as a constant in the inner integral)
+\\$=\left(xe^x-e^x\eval{0}{1}\right)\left(\ln|y|\;\eval{1}{2}\right)$
+\\$=\left[(e-e)-(0-e^0)\right]\left[\ln2-\ln1\right]
+\\=\ln2$
+
+\paragraph{Alternate}
+$=\Int{0}{1}xe^x\ln|y|\eval{y=1}{2}dx$
+\\$=\Int{0}{1}xe^{x}(\ln|2|-\ln|1|)dx$
+\\$=\Int{0}{1}xe^{x}\ln|2|dx$
+\\$=\ln|2|\Int{0}{1}xe^{x}dx$\quad Let $u=x$, $du=dx$, $v=e^x$, $dv=e^xdx$, $xe^{x}-\int e^xdx=xe^{x}-e^x$
+\\$=\ln|2|\left[xe^x-e^x\eval{x=0}{1}\right]=\ln|2|\left[(1e^1-e^1)-(0e^0-e^0)\right]=\ln2(1)=\ln2$
+
+\subsubsection{Example 2}
+Evaluate $\int\Int{R}{}x\cos(xy)dA$ where $R=\{(x,y)|0\leq x\leq\pi,\;1\leq y\leq2\}$
+\paragraph{Solution} $\int\Int{R}{}x\cos(xy)dA=\Int{x=0}{\pi}{y=1}{2}x\cos(xy)dy\;dx$
+\\$=\Int{0}{\pi}x\;\frac{\sin(xy)}{x}\eval{y=1}{2}dx$
+\\$=\Int{0}{\pi}(\sin(2x)-\sin x)dx=\frac{-\cos2x}{2}-(-\cos x)\eval{x=0}{\pi}$
+\\$=\left(\frac{-\cos2\pi}{2}+\cos\pi\right)-\left(\frac{-\cos0}{2}+\cos0\right)$
+\\$=(\frac{-1}{2}+(-1))-(\frac{-1}{2}+1)$
+\\$=\frac{-3}{2}-\frac{1}{2}=\frac{-4}{2}=-2$
+\\\\Could also try $\Int{1}{2}\Int{0}{\pi}x\cos(xy)dx\;dy$: let $u=x$, $du=dx$, $v=\frac{\sin(xy)}{y}$, $dv=\cos(xy)dx$. Try it yourself.
+
+\newpage
+\subsubsection{Area and Volume}
+We have equations for area and volume. For area, only two dimensions are considered. So we have $A=\Int{a}{b}f(x)dx$ (if $f(x)\geq0$ on $[a,b]$).
+\\For volume, we have three dimensions, so we have $V=\int\Int{R}{}f(x,y)dA$ (if $f(x,y)\geq0$ on $R$).
+
+\subsubsection{Example 3}
+Find the volume of the solid bounded by the elliptic paraboloid $z=1+(x-1)^2+4y^2$, the planes $x=3$, $y=2$ and the coordinate planes.
+\\(Note: $z=f(x,y)$)
+\paragraph{Solution}
+$V=\int\Int{R}{}f(x,y)dA=\Int{0}{3}\Int{0}{2}(1+(x-1)^2+4y^2)dy\;dx$
+\\$V=\Int{0}{3}y+(x-1)^2y+\frac{4y^3}{3}\eval{0}{2}dx=\Int{0}{3}2+(x-1)^22+\frac{4(2)^3}{3}-(0+0+0)dx$
+\\$=\Int{0}{3}\left[\frac{38}{3}+2(x-1)^2\right]dx
+\\=\frac{38}{3}x+\frac{2(x-1)^3}{3}\eval{0}{3}$
+\\$=\left(\frac{38}{3}(3)+\frac{2(3-1)^3}{3}\right)-\left(0+\frac{2(-1)^3}{3}\right)$
+\\$=\frac{38(3)}{3}+\frac{16}{3}+\frac{2}{3}=38+\frac{18}{3}=44$
+
+\subsection{(15.2) Double Integrals Over General Regions}
+For some region where $y=h(x)$ is the upper portion and $y=g(x)$ is some lower portion, then use:\\$\int\Int{R}{}f(x,y)dA=\Int{a}{b}\Int{g(x)}{h(y)}f(x,y)dy\;dx$
+\\\\If you have some sideways function where $x=h(y)$ is the "upper" portion and $x=g(y)$ is the "lower", then use:\\$\int\Int{R}{}f(x,y)dA=\Int{c}{d}\Int{g(y)}{h(y)}f(x,y)dx\;dy$
+\\The outer integral \textbf{always} has constant boundaries.
+
+\subsubsection{Example 1}
+Sketch the region and write an iterated integral of $\int\Int{R}{}f(x,y)dA$ where $R$ is the region bounded by $x=6-y^2$ and $y=-x$.
+\paragraph{Solution}
+$\int\Int{R}{}f(x,y)dA=\Int{-2}{3}\Int{-y}{6-y^2}f(x,y)dx\;dy$. The function can be illustrated as such:
+\\\includegraphics[width=150px]{15-2-1.png}
+
+\newpage\subsubsection{Example 2}
+Evaluate $\int\Int{D}{}(x+y)dA$ where $D$ is the region bounded by $y=\sqrt{x}$ and $y=x^2$
+\paragraph{Solution}
+$\int\Int{D}{}(x+y)dA=\Int{0}{1}\Int{x^2}{\sqrt{x}}(x+y)dydx$
+\\$=\Int{0}{1}xy+\frac{y^2}{2}\eval{y=x^2}{\sqrt{x}}dx$
+\\$=\Int{0}{1}\left(x\sqrt{x}+\frac{\sqrt{x}^2}{2}\right)-\left(xx^2+\frac{(x^2)^2}{2}\right)dx
+\\=\Int{0}{1}\left(x^{\frac{3}{2}}+\frac{x}{2}-x^3-\frac{x^4}{2}\right)dx$
+\\$=\frac{x^{\frac{5}{2}}}{\frac{5}{2}}+\frac{x^2}{4}-\frac{x^4}{4}-\frac{x^5}{2(5)}\eval{0}{1}$
+\\$=\frac{2}{5}+\frac{1}{4}-\frac{1}{4}-\frac{1}{10}=\frac{4-1}{10}=\frac{3}{10}$
+
+\subsubsection{Example 3}
+Evaluate $\int\Int{D}{}2xydA$, where $D$ is the triangular region with vertices $(0,0)$, $(1,2)$ and $(0,3)$.
+\paragraph{Solution}
+Use the equation $m=\frac{y_2-y_1}{x_2-x_1}$ for the points $(0,0)$ and $(1,2)$ to get $y-y_1=m(x-x_1)$
+to get $y=2x$, then do the same with $(0,3)$ and $(1,2)$ to get the equation $y=-x+3$
+\\We then get: $\int\Int{D}{}2xydA=\Int{0}{1}\Int{2x}{-x+3}2xydydx$
+\\$=\Int{0}{1}2x\frac{y^2}{2}\eval{2x}{-x+3}dx
+\\=\Int{0}{1}\left[x(-x+3)^2-x(2x)^2\right]dx
+\\=\Int{0}{1}\left[x(x^2-6x+9)-x(4x^2)\right]dx
+\\=\Int{0}{1}(x^3-6x^2+9x-4x^3)dx
+\\=\Int{0}{1}(-3x^3-6x^2+9x)dx
+\\=\frac{-3x^4}{4}-\frac{6x^3}{3}+\frac{9x^2}{2}\eval{0}{1}
+\\=\left(\frac{-3}{x}-2+\frac{9}{2}\right)-(0)
+\\=\frac{-3-8+18}{4}=\frac{7}{4}$
+
+\subsubsection{Example 4}
+Evaluate $\Int{0}{1}\Int{x^2}{1}x^3\sin(y^3)dydx$
+\paragraph{Solution}
+We cannot integrate $\int sin y^3dy$. Therefore, we must reverse the order of integration.
+\\$\Int{0}{1}\Int{x^2\to y=x^2}{1\to y=1}x^3\sin(y^3)dydx=\Int{0}{1}\Int{0}{\sqrt{y}}x^3\sin(y^3)dxdy$
+\\$=\Int{0}{1}\frac{x^4}{4}\sin(y^3)\eval{0}{\sqrt{y}}dy=\Int{0}{1}\frac{(\sqrt{y})^4}{4}\sin(y^3)-0dy$
+\\$=\Int{0}{1}\frac{y^2}{4}\sin(y^3)dy$, let $u=y^3$, $du=3y^2dy$
+\\$=\int\frac{1}{4}\sin udu=\frac{-1}{12}\cos(y^3)\eval{0}{1}=\frac{-1}{12}(\cos1-\cos0)=\frac{-1}{12}(\cos1-1)$
+
+\subsection{Applications of Double Integral}
+\textbf{Area} $=\int\Int{D}{}dA$
+\\\textbf{Volume} $=\int\Int{D}(z_{upper}-z_{lower})dA$
+\newpage\subsubsection{Example 5}
+Use double integrals to compute the area of the region bounded by $y=x^2$ and $y=2-x$
+\paragraph{Solution} Calculate the POIs of the equations: $x^2=2-x\Rightarrow x^2+x-2=0\Rightarrow (x+2)(x-1)=0\Rightarrow x=-2,1$
+\\Now, Area $=\Int{-2}{1}\Int{x^2}{2-x}dydx=\Int{-2}{1}y\eval{x^2}{2-x}dx$
+\\$=\Int{-2}{1}(2-x-x^2)dx=2x-\frac{x^2}{2}-\frac{x^3}{3}\eval{-2}{1}$
+\\$=(2-\frac{1}{2}-\frac{1}{3})-(2(-2)-\frac{(-2)^2}{2}-\frac{(-2)^3}{3})=\frac{7}{6}-\frac{-10}{3}=\frac{7+20}{6}=\frac{9}{2}$
+
+\subsection{Midterm on July 4th, CHN G133}
+Covers sections 12.5, 12.6, 13.1-13.4, 14.1-14.8
+\begin{itemize}
+    \itemsep 0em
+    \item Sction 12.5 (1 or 2 questions): \begin{itemize}
+        \itemsep 0em
+        \item Equation of a line: $\vec{r}=\vec{r_0}+t\vec{v}$, in the case of tangent line: $\vec{V}=\vec{r}(t_0)$ where $\vec{V}$ is the direction vector.
+        \item Equation of a plane: $a(x-x_0)+b(y-y_0)+c(z-z_0)=0$, in the case of a tangent plane: $\vec{n}=\tri f$ (sections 14.4 and 14.6)
+    \end{itemize}
+    \item Section 13.1 (2 or 3 questions): \begin{itemize}
+        \itemsep 0em
+        \item 13.1: Domain $\vec{r}(t)=<f(t),g(t),h(t)>$ and limits $\lim \vec{r}(t)=<\lim f,\lim g,\lim h>$
+        \item 13.2: Derivatives $\vec{r}'(t)=<f'(t),g'(t),h'(t)>$ and integrals $\int\vec{r}(t)dt=<\int fdt,\int gdt,\int hdt>$ (covered indirectly).
+        \item Unit tangent vector $\vec{T}(t)=\frac{\vec{r}'(t)}{|\vec{r}'(t)|}$ and unit normal vector $\vec{N}=\frac{\vec{T}'(t)}{|\vec{T}'(t)|}$
+    \end{itemize}
+    \item Section 13.3 (1 question): Arc length $=\Int{a}{b}|\vec{r}'(t)|dt$
+    \item 1 question: Curvature $K=\frac{|\vec{T}'(t)|}{|\vec{r}'(t)|}$ or $K=\frac{|\vec{r}'\times\vec{r}''|}{|\vec{r}'|^3}$
+    \item Chapter 3 (section 14.2) (4,5 or 6 questions): limits and continuity: \begin{itemize}
+        \itemsep 0em
+        \item Sub in $x=a$ and if we get an answer, we get the limit.
+        \item If it is $\frac{0}{0}$, then we need to do any of the following: factorization, rationalization, polar coordinates, etc.
+        \item We can show two paths with different answers to show that the limit does not exist.
+        \item L'Hopital's rule only works with one variable.
+        \item You can use polar coordinates to potentially show if the limit depends on $\theta$, then the limit DNE.
+    \end{itemize}
+    \item Section 14.7: local maximum/minimum, saddle point: \begin{itemize}
+        \itemsep 0em
+        \item If $f_x=0$ and $f_y=0$, then you have a critical point.
+        \item $D=\mat{f_{xx}}{f_{xy}}{f_{xy}}{f_{yy}}$. If $D<0\Rightarrow$ saddle point, otherwise it is a local minimm or maximum.
+        \item If $D>0$ and $f_{xx}>0$, then it is a local minimum. If $f_{xx}<0$ then it is a local maximum.
+    \end{itemize}
+    \item Optimization problem (1 question): \begin{itemize}
+        \itemsep 0em
+        \item You can eliminate $z$ and use section 14.7.
+        \item If not, use Lagrange multipliers: find the maximum or minimum values of $f(x\dots)=\dots$ subject to $dots$.
+    \end{itemize}
+    \item Section 12.6: Quadric surfaces (no direct questions).
+    \item Section 14.3: partial derivatives (covered indirectly).
+    \item Section 14.4: tangent plane and linear approximation: $f(x,y)\approx f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$
+    \item Section 14.6: directional derivative: $D_uf=\tri f\cdot\vec{u}$ where $\vec{u}$ is the unit vector.
+\end{itemize}
 
 \end{document}

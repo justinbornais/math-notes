@@ -10,8 +10,17 @@
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
 \newcommand{\p}{\partial}
 \newcommand{\dg}{^{\circ}}
+\newcommand{\tri}{\vec{\bigtriangledown}}
 \newcommand{\mat}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
 \newcommand{\mathree}[9]{\begin{bmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}}
+\newcommand{\der}[2]{\frac{d #1}{d #2}}
+\newcommand{\pat}[2]{\frac{\partial #1}{\partial #2}}
+\newenvironment{ind}[1]
+ {\begin{list}{}
+         {\setlength{\leftmargin}{#1}}
+         \item[]
+ }
+ {\end{list}}
 
 \title{Differential Equations}
 \author{Justin Bornais}
@@ -616,5 +625,300 @@ Show that $y_1=\cos5x$ and $y_2=\sin5x$ are fundamental set of solutions of the 
 \\$y=\cos5x,y'=-5\sin5x,y''=-25\cos5x\Rightarrow -25\cos5x+25\cos5x=0\Rightarrow0=0$
 \\$y=\sin5x,y'=5\cos5x,y''=-25\sin5x\Rightarrow -25\sin5x+25\sin5x=0\Rightarrow0=0$
 \\So $y_1,y_2$ are fundamental set of solutions.
+
+\subsection{(4.1) Linear Equations}
+The equation $a_ny^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_1y'+a_0y=g(x)$ is an nth order linear DE.
+\\The equation $a_ny^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_1y'+a_0y=0$ is a homogeneous equation.
+\begin{itemize}
+    \itemsep 0em
+    \item The equation $3xy''+2y'-6y=7x$ is linear.
+    \item The equation $3xy''+2y'-6y=0$ is homogeneous.
+\end{itemize}
+If $y_1,y_2,\dots,y_n$ are the fundamental solutions of an nth order homogeneous DE, then
+$y=c_1y_1+c_2y_2+\dots+c_ny_n$ will be the general solution of the DE.
+\newpage
+For non-homogeneous DEs, the solution is $y=y_c+y_p$ where: \begin{itemize}
+    \itemsep 0em
+    \item $y_c$ is the complementary function (solution of associated homogeneous function); and
+    \item $y_p$ is the solution of nonhomogeneous equation, has no constants.
+\end{itemize}
+
+\subsection{(4.2) Reduction of Order}
+Consider the second-order linear DE: $a_2(x)y''+a_1(x)y'+a_0(x)y=g(x)\Rightarrow
+y''+\frac{a_1(x)}{a_2(x)}y'+\frac{a_0(x)}{a_2(x)}y=\frac{g(x)}{a_2(x)}$.
+\\Notice we have the equation in standard form: $y''+P(x)y'+Q(x)y=f(x)$ where $P(x)=\frac{a_1(x)}{a_2(x)}$,
+$Q(x)=\frac{a_0(x)}{a_2(x)}$ and $f(x)=\frac{g(x)}{a_2(x)}$
+\\\\If we know that $y_1$ is a solution of the above equation, then if we can find a second solution
+$y_2$ which is linearly independent of $y_1$, then we can have the solution of the DE $y=y_c+y_p$, where $y_c=2c_1y_1+c_2y_2$
+and $y_p$ has no constant $c$.
+\\We say that $y_2=uy_1$ where $u(x)$ is a function of $x$. The challenge is finding $u$.
+
+\subsubsection{Example 1}
+Given that $y_1=x^7$ is a solution of the DE $x^2y''-13xy'+49y=0$, find the second solution.
+\paragraph{Solution} Let $y_2=uy_1=ux^7$
+\\Let $y=ux^7$. This should satisfy the equation.
+\\$y'=u'x^7+u7x^6$
+\\$y''=u''x^7+u'7x^6+u'7x^6+42ux^5$
+
+
+
+\subsection{(4.3) Homogeneous Equations with Constant Coefficients}
+2nd order linear homogeneous equations with a constant coefficient would be $ay''+by'+cy=0$.
+\\The auxiliary equation is $am^2+bm+c=0\Rightarrow m=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$
+\\We must examine the following cases:
+\begin{enumerate}
+    \item When $b^2-4ac>0$, we have two distinct reql roots $m_1$ and $m_2$. The solution of the DE is:\\$y=C_1e^{m_1x}+C_2e^{m_2x}$ (or $C_1y_1+C_2y_2$, where $y_1=e^{m_1x}$ and $y_2=e^{m_2x}$)
+    \item When $b^2-4ac=0$, we have one real root, which means it will appear twice in the solution.
+    The solution of the DE is $y=C_1e^{mx}+C_2e^{mx}$ where $y_1=y_2=e^{mx}$
+    \item When $b^2-4ac<0$, we have two imaginary/complex roots: $m_1=\alpha+i\beta$ and $m_2=\alpha-i\beta$.
+    The solution of the DE is $y=e^{\alpha x}(C_1\cos{\beta x}+C_2\sin{\beta x})$.
+    \\A useful formula is Euler's formula: $e^{i\theta}=\cos\theta+i\sin\theta$
+\end{enumerate}
+
+\subsubsection{Example 1}
+Solve the DE (find the general solution of the DE) $y''-y'-2y=0$
+\paragraph{Solution} The auxiliary equation is $m^2-m-2=0\Rightarrow(m-2)(m+1)=0\Rightarrow m=2,-1$
+\\The solution is $y=c_1e^{2x}+c_2e^{-x}$
+
+\subsubsection{Example 2}
+Solve the DE (find the general solution of the DE) $y''-18y'+81y=0$
+\paragraph{Solution} The auxiliary equation is $m^2-18m+81=0\Rightarrow (m-9)(m-9)=0\Rightarrow m=9,9$
+\\The solution of the DE is $y=c_1e^{9x}+c_2e^{9x}$
+\\\\The idea can be extended to linear equations with any order.
+\\Suppose we had a 7th order equation where $m=0,1,1,1,2,2+i,2+i$.
+\\Th solution of that DE is $yc_1e^{0x}+c_2e^x+c_3e^x+c_4e^x+c_5e^{2x}+e^{2x}(c_6\cos{x}+c_7\sin{x})$
+
+\subsubsection{Example 3}
+Solve the DE (find the general solution of the DE) $y^{(4)}-7y''-18y=0$
+\paragraph{Solution} The auxiliary equation is $m^4-7m^2-18=0$. Let $m^2=t$.
+\\Then $t^2-7t-18=0\Rightarrow(t-9)(t+2)=0\Rightarrow t=9,-2$
+\\Thus $m^2=9\Rightarrow m=\pm\sqrt{9}=\pm3$
+\\or $m^2=-2\Rightarrow m=\pm\sqrt{-2}=\pm i\sqrt{2}$
+\\The solution is $y=c_1e^{3x}+c_2e^{-3x}+e^{0x}(c_3\cos\sqrt{2}x+c_4\sin\sqrt{2}x)$
+
+\subsubsection{Example 4}
+Solve the DE (find the general solution of the DE) $y^{(5)}-8y^{(4)}+18y'''=0$
+\paragraph{Solution} The auxiliary equation is $m^5-8m^4+18m^3=0\Rightarrow m^3(m^2-8m+18)=0$
+\\From this, we already have 3 out of 5 solutions: $m=0,0,0$.
+\\$m=\frac{-(-8)\pm\sqrt{(-8)^2-4(1)(18)}}{2(1)}=\frac{8\pm\sqrt{-8}}{2}=\frac{8\pm\sqrt{-4(2)}}{2}=\frac{8\pm2i\sqrt{2}}{2}
+=\frac{2(4\pm i\sqrt{2})}{2}=4\pm i\sqrt{2}$
+\\\\The solution of the DE is $y=c_1e^{0x}+c_2xe^{0x}+c_3x^2e^{0x}+e^{4x}(c_4\cos\sqrt{2}x+c_5\sin\sqrt{2}x)$
+\\\\For nonhomogeneous linear DEs $a_ny^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_1y'+a_0y=g(x)$, we have the following steps: \begin{enumerate}
+    \itemsep 0em
+    \item Find a solution of the associated homogeneous linear equation (i.e. $g(x)=0$). The solution will be $y_c=c_1y_1+c_2y_2+...+c_ny_n\Rightarrow$ complementary function.
+    \item Solve the nonhomogeneous equation and this will give $y_p\Rightarrow$ particular solution (remember: $y_p$ has no $c_1,c_2$, etc.). Learn this from sections 4.4 and 4.6.
+    \item The solution is $y=y_c+y_p$.
+\end{enumerate}
+
+\subsection{(4.4) Method of Undetermined Coefficients}
+This method finds $y_p$ for nonhomogeneous linear DEs if: \begin{enumerate}
+    \itemsep 0em
+    \item The coefficients $a_n, a_{n-1},\dots,a_2,a_1,a_0$ are constants.
+    \item $g(x)$ can be a constant, a polynomial $p(x)$, $e^{kx}$, $\sin{kx}$, $\cos{kx}$,
+        or a sum/difference and product of these functions.
+        \\$g(x)=e^{3x}$, $g(x)=x^2+2-\cos{5x}$, $g(x)=(\sin3x)e^{x}$ are fine.
+        However, $g(x)$ cannot be $\ln x$, $e^{3x^2}$, $\sec x$, $\tan x$, $\sqrt{x+3}$, etc.
+\end{enumerate}
+For the method of undetermined coefficient, we assume a form of $y_p$ based on $g(x)$ and $y_c$.
+We will find the coefficients $A$, $B$, etc.
+
+\begin{center}
+    \begin{tabular}{||c c||} 
+     \hline
+     $g(x)$ & $y_p$ \\ [0.5ex] 
+     \hline\hline
+     $3$ & $A$ \\ 
+     \hline
+     $x^3-4$ & $Ax^3+Bx^2+Cx+D$ \\
+     \hline
+     $e^{2x}$ & $Ae^{2x}$ \\
+     \hline
+     $\cos3x$ & $A\cos3x+B\sin3x$ \\
+     \hline
+     $\sin3x$ & $A\cos3x+B\sin3x$ \\
+     \hline
+     $3+e^{2x}$ & $A+Be^{2x}$ \\
+     \hline
+     $xe^{3x}$ & $(Ax+B)e^{3x}$ \\
+     \hline
+     $x\sin5x$ & $(Ax+B)\cos5x+(Cx+D)\sin5x$ \\ [1ex] 
+     \hline
+    \end{tabular}
+\end{center}
+Note that $xe^{3x}$ turns into $y_p=(Ax+B)e^{3x}$ because the $x$ turns into $(Ax+B)$ and the $e^{3x}$ turns into $y_p=Ce^{3x}$.
+Then, distributive property turns it into $ACxe^{3x}+BCe^{3x}$, but we could just say $A=AC$ and $B=BC$ to make it $Axe^{3x}+Be^{3x}$.
+
+\subsubsection{Example}
+Solve the DE: $y''-y'-2y=4x^2$
+\paragraph{Solution}
+\textbf{Step 1:} The associated homogeneous linear equation is $y''-y'-2y=0$
+\\The auxiliary equation is $m^2-m-2=0\Rightarrow(m-2)(m+1)=0\Rightarrow m=2,-1$
+\\$y_c=c_1e^{2x}+c_2e^{-x}$
+\\\\\textbf{Step 2:} To find $y_p$: Let $y_p=Ax^2+Bx+C$, $y_p'=2Ax+B$, $y_p''=2A$
+\\Substituting into the original equation: $2A-(2Ax+B)-2(Ax^2+Bx+C)=4x^2$
+\\$2A-2Ax-B-2Ax^2-2Bx-2C=4x^2$
+\\Comparing coefficients of $x^2$: $-2A=4\Rightarrow A=-2$
+\\$x:\; -2A-2B=0\Rightarrow-2(-2)-2B=0\Rightarrow2B=4\Rightarrow B=2$
+\\Constants: $-2A-B-2C=0\Rightarrow -2(-2)-2-2C=0\Rightarrow -6=2C\Rightarrow C=-3$
+\\So $y_p=-2x^2+2x-3$.
+\\\\\textbf{Step 3:} The solution is $y=y_c+y_p=c_1e^{2x}+c_2e^{-x}-2x^2+2x-3$
+
+\subsection{(4.6) Variations of Parameters}
+Sometimes, the method of undetermined coefficients (section 4.4) doesn't work. In this case, we can use variations of parameters.
+In all cases, this method works but sometimes we cannot integrate. Choose this method if the method of undetermined coefficients does not work.
+\\\\To find $y_p$ for 2nd order equations: $a_2y''+a_1y'+a_0y=g(x)$, use section 4.3 to solve $y_c=c_1y_1+c_2y_2$ where $c_1$ and $c_2$ are constant parameters.
+\\Then let $y_p=u_1y_1+u_2y_2$, where $u_1$ and $u_2$ are variable parameters.
+\\$a_2y''+a_1y'+a_0y=g(x)\Rightarrow y''+\frac{a_1}{a_2}y'+\frac{a_0}{a_2}y=\frac{g(x)}{a_2}\Rightarrow y''+P(x)y'+Q(x)y=f(x)$
+\\To derive the formula, we need the system: \begin{itemize}
+    \itemsep 0em
+    \item $y_1u_1'+y_2u_2'=0$
+    \item $y_1'u_1'+y_2'u_2'=f(x)$
+\end{itemize}
+$u_1'=\frac{\mat{0}{y_2}{f(x)}{y_2'}}{\mat{y_1}{y_2}{y_1'}{y_2'}}=\frac{W_1}{W}$
+and $u_2'=\frac{\mat{y_1}{0}{y_1'}{f(x)}}{\mat{y_1}{y_2}{y_1'}{y_2'}}=\frac{W_2}{W}$. Also: $W=W(y_1,y_2)$, $u_1=\int\frac{W_1}{W}dx$ and $u_2=\int\frac{W_2}{W}dx$.
+\\This is Cramer's Rule.
+
+\subsubsection{Example 1}
+Find the general solution of the equation $y''-2y'+y=\frac{e^x}{x}$.
+\paragraph{Solution} We cannot use the method of undetermined coefficients, since $x^{-1}$ is not a polynomial.
+\\The associated homogeneous equation is $y''-2y'+y=0$ (section 4.3)
+\\The auxiliary equation is $m^2-2m+1=0\Rightarrow(m-1)(m-1)=0\Rightarrow m=1,1$
+\\So $y_c=c_1e^x+c_2xe^x$
+\\\\Now, $y''-2y'+y=xe^x\Rightarrow$ can use undetermined coefficients.
+\\However, $y''-2y'+xy=xe^x\Rightarrow$ cannot use undetermined coefficients.
+\\$y''-2y'+y=\frac{x}{e^x}\Rightarrow y''-2y'+y=xe^{-x}\Rightarrow$ can use undetermined coefficients.
+\\$y''-2y'+y=\frac{e^x}{x^2+1}=e^{x}\cdot\frac{1}{x^2+1}$
+\\\\To find $y_p$: $W=\mat{y_1}{y_2}{y_1'}{y_2'}=\mat{e^x}{xe^x}{e^x}{(1)e^x+xe^x}=e^xe^x+xe^xe^x-xe^xe^x=e^{2x}$
+\\$W_1=\mat{0}{y_2}{f(x)}{y_2'}=\mat{0}{xe^x}{\frac{e^x}{x}}{e^x+xe^x}=0-xe^x\frac{e^x}{x}=-e^{2x}$
+\\$W_2=\mat{y_1}{0}{y_1'}{f(x)}=\mat{e^x}{0}{e^x}{\frac{e^x}{x}}=\frac{e^xe^x}{x}-0=\frac{e^{2x}}{x}$
+\\$u_1'=\frac{W_1}{W}=\frac{-e^{2x}}{e^{2x}}=-1\Rightarrow u_1=\int-1dx=-x$
+\\$u_2'=\frac{W_2}{W}=\frac{\frac{e^{2x}}{x}}{e^{2x}}=\frac{1}{x}\Rightarrow u_2=\int\frac{1}{x}dx=\ln|x|$
+\\(Note: Do not write the $+C$ for $u_1$ or $u_2$)
+\\Thus $y_p=u_1y_1+u_2y_2=-xe^x+\ln|x|xe^x$
+\\\\The solution is $y=y_c+y_p=c_1e^x+c_2xe^x-xe^x+x\ln|x|e^x$
+
+\newpage\subsubsection{Example 2}
+Solve the DE: $5y'''-5y'=\sec x\Rightarrow$ cannot use undetermined coefficients.
+\paragraph{Solution}
+The associated homogeneous equation is $5y'''+5y'=0$
+\\The auxiliary equation is $5m^3+5m=0\Rightarrow5m(m^2+1)=0\Rightarrow m=0$ and $m^2=-1\Rightarrow m=\pm i$ ($\alpha=0,\;\beta=1)$
+\\So $y_c=c_1e^{0x}+e^{0x}(c_2\cos x+c_3\sin x)=c_1+c_2\cos x+c_3\sin x$
+\\\\Now, $y_p=u_1y_1+u_2y_2+u_3y_3$
+\\$W=\mathree{y_1}{y_2}{y_3}{y_1'}{y_2'}{y_3'}{y_1''}{y_2''}{y_3''}=\mathree{1}{\cos x}{\sin x}{0}{-\sin x}{\cos x}{0}{-\cos x}{-\sin x}
+=1\mat{-\sin x}{\cos x}{-\cos x}{-\sin x}-0\mat{\cos x}{\sin x}{-\cos x}{-\sin x}+0\mat{\dots}{\dots}{\dots}{\dots}\\=1(\sin^2x+\cos^2x)=1$
+\\$W_1=\mathree{0}{y_2}{y_3}{0}{y_2'}{y_3'}{f(x)}{y_2''}{y_3''}=\mathree{0}{\cos x}{\sin x}{0}{-\sin x}{\cos x}{\frac{\sec x}{5}}{-\cos x}{-\sin x}
+=0\mat{\dots}{\dots}{\dots}{\dots}-0\mat{\dots}{\dots}{\dots}{\dots}+\frac{\sec x}{5}\mat{\cos x}{\sin x}{-\sin x}{\cos x}
+\\=\frac{\sec x}{5}(\cos^2x+\sin^2x)=\frac{\sec x}{5}$
+\\$W_2=\mathree{1}{0}{\sin x}{0}{0}{\cos x}{0}{\frac{\sec x}{5}\,(f(x))}{-\sin x}
+=1\mat{0}{\cos x}{\frac{\sec x}{5}}{-\sin x}-0\mat{\dots}{\dots}{\dots}{\dots}+0\mat{\dots}{\dots}{\dots}{\dots}
+=1(0-\cos x\cdot\frac{\sec x}{5})=\frac{-1}{5}$
+\\$W_3=\mathree{1}{\cos x}{0}{0}{-\sin x}{0}{0}{-\cos x}{\frac{\sec x}{5}}=1\mat{-\sin x}{0}{-\cos x}{\frac{\sec x}{5}}=-\sin x\cdot\frac{\sec x}{5}-0=\frac{-\sin x}{5\cos x}$
+\\$u_1'=\frac{W_1}{W}=\frac{\frac{\sec x}{5}}{1}=\frac{\sec x}{5}\Rightarrow u_1=\int\frac{\sec x}{5}dx=\frac{1}{5}\ln|\sec x+\tan x|$
+\\$u_2'=\frac{W_2}{W}=\frac{\frac{-1}{5}}{1}=\frac{-1}{5}\Rightarrow u_2=\int\frac{-1}{5}dx=\frac{-1}{5}x$
+\\$u_3'=\frac{W_3}{W}=\frac{\frac{-\sin x}{5\cos x}}{1}=\frac{-\sin x}{5\cos x}$
+\\$u_3=\int\frac{-\sin x}{5\cos x}dx\;$ let $u=\cos x$, $du=-\sin xdx\Rightarrow u_3=\frac{1}{5}\int\frac{du}{u}=\frac{1}{5}\ln|u|=\frac{1}{5}\ln|\cos x|$
+\\Thus $y_p=u_1y_1+u_2y_2+u_3y_3=\frac{1}{5}\ln|\sec x+\tan x|(1)-\frac{x}{5}\cos x+\frac{1}{5}\ln|\cos x|\sin x$
+\\\\Thus the solution is $y=y_c+y_p=c_1+c_2\cos x+c_3\sin x+\frac{1}{5}\ln|\sec x+\tan x|-\frac{x}{5}\cos x+\frac{1}{5}\ln|\cos x|\sin x$
+\\\\For future reference:\begin{itemize}
+    \itemsep 0em
+    \item $W_1=\mathree{0}{y_2}{y_3}{0}{y_2'}{y_3'}{f(x)}{y_2''}{y_3''}$
+    \item $W_2=\mathree{y_1}{0}{y_3}{y_1'}{0}{y_3'}{y_1''}{f(x)}{y_3''}$
+    \item $W_2=\mathree{y_1}{y_2}{0}{y_1'}{y_2'}{0}{y_1''}{y_2''}{f(x)}$
+\end{itemize}
+
+\subsubsection{Example 3}
+Solve the IVP: $2y''+y'-y=x;\;y(0)=1,y'(0)=0$
+\paragraph{Solution} The auxiliary homogeneous equation is $2y''+y'-y=0$
+\\The auxiliary equation is $2m^2+m-1=0\Rightarrow(2m+2)(2m-1)=0\Rightarrow(m+1)(2m-1)=0\Rightarrow m=-1,m=\frac{1}{2}$
+\\Thus $y_c=c_1e^{-x}+c_2e^{\frac{x}{2}}$ or $y_c=c_1e^{\frac{x}{2}}+c_2e^{-x}$
+\\\\To find $y_p$:
+\\$W=\mat{e^{\frac{x}{2}}}{e^{-x}}{\frac{1}{2}e^{\frac{x}{2}}}{-e^{-x}}=-e^{-x}e^{\frac{x}{2}}-\frac{1}{2}e^{-x}e^{\frac{x}{2}}=-e^{\frac{-x}{2}}-\frac{1}{2}e^{\frac{-x}{2}}=-\frac{3}{2}e^{\frac{-x}{2}}$
+\newpage
+$W_1=\mat{0}{e^{-x}}{\frac{x}{2}}{-e^{-x}}=\frac{-x}{2}e^{-x}\Rightarrow u_1'=\frac{W_1}{W}=\frac{\frac{-x}{2}e^{-x}}{\frac{-3}{2}e^{\frac{-x}{2}}}=\frac{x}{3}e^{\frac{-x}{2}}$
+\\$u_1=\int\frac{x}{3}e^{\frac{-x}{2}}dx\dots$ Solve yourself.
+\\Continue with $W_2$.
+\\\\The easier method for this problem is undetermined coefficients: Let $y_p=Ax+B,\;y_p'=A,y_p''=0$
+\\$\Rightarrow2(0)+A-Ax-B=x\Rightarrow x:\;-A=1\Rightarrow A=-1$
+\\Constants: $A-B=0\Rightarrow B=A=-1\Rightarrow y_p=-x-1$
+\\\\The solution is $y=y_c+y_p=c_1e^{\frac{x}{2}}+c_2e^{-x}-x-1$
+\\$y(0)=1\Rightarrow c_1e^0+c_2e^{-0}-0-1\Rightarrow 1=c_1+c_2-1\Rightarrow c_1+c_2=2$
+\\Then $y'(0)=0\Rightarrow y'=\frac{1}{2}c_1e^{\frac{x}{2}}-c_2e^{-x}-1$
+\\$y'(0)=0\Rightarrow 0=\frac{1}{2}c_1e^0-c_2e^0-1\Rightarrow \frac{1}{2}c_1-c_2=1$
+\\By elimination, $\frac{3}{2}c_1=3\Rightarrow c_1=3\frac{2}{3}=2$
+\\Then $c_1+c_2=2\Rightarrow c_2=0$
+\\The solution of the IVP is $y=2e^{\frac{x}{2}}-x-1$
+
+\subsection{(4.7) Cauchy-Euler Equations}
+$3y'''-2y''=\cos x$ has constant coefficients: $y_c$ using section 4.3.
+\\If the coefficients are not constant (i.e. $3x^2y'''+3y'=7e^x$), normally infinite series are used to solve it.
+\\We will learn to solve a special case of DE: $a_nx^ny^{(n)}+a_{n-1}x^{n-1}y^{(n-1)}+\dots+a_2x^2y''+a_1xy'+a_0y=g(x)$
+\\The power of $x$ and the order of derivative is the same in every term.
+\\\\$x^3y'''-2xy'+y=\sin x\Rightarrow$ Cauchy Euler equation (CE)
+\\However, $xy''+3y'=e^x$ is not a CE.
+\\Also, $xy''+3y'=e^x$ is a CE as multiplying by $x$ yields: $x^2y''+2xy'=xe^x$
+\\\\How to solve: \begin{enumerate}
+    \itemsep 0em
+    \item Find $y_c$ the solution of the associated homogeneous equation. You \textbf{cannot use 4.3 for this}!
+    \item Find $y_p$ by variation of parameter method.
+    \item Solution is $y=y_c+y_p$.
+\end{enumerate}
+To find $y_c$, we need a new method:
+
+\subsubsection{New Method to Find $y_c$}
+Start with a 2nd order CE equation: $ax^2y''+bxy'+cy=0$
+\\Let $y=x^m$ be a solution: $y'=mx^{m-1}$ and $y''=m(m-1)x^{m-2}$
+\\Substitute this into the original equation: $ax^2m(m-1)x^{m-2}+bxmx^{m-1}+cx^m=0$
+\\$a(m^2-m)x^m+bmx^m+cx^m=0\Rightarrow x^m(am^2-am+bm+c)=0$, where $x\neq0$
+\\\\We get the auxiliary equation $am^2-(b-a)m+c=0$, and the following cases: \begin{enumerate}
+    \itemsep 0em
+    \item We have distinct real roots $m_1$, $m_2$: $y_c=c_1x^{m_1}+c_2x^{m_2}$
+    \item Repeated roots $m$, $m$: $y_c=c_1x^m+c_2x^m\ln x$
+    \item Complex roots $m=\alpha\pm i\beta$: $y_c=x^{\alpha}(c_1\cos(\beta\ln x)+c_2\sin(\beta\ln x))$
+\end{enumerate}
+
+\subsubsection{Example 1}
+Solve the DE: $x^2y''+2xy'-20y=0$ (this is a CE).
+\paragraph{Solution} We have $a=1,\;b=2,\;c=20$
+\\The auxiliary equation is $am^2+(b-a)m+c=0\Rightarrow m^2+(2-1)m-20=0\Rightarrow m^2+m-20=0
+\\\Rightarrow(m+5)(m-4)=0\Rightarrow m=-5,4$
+\\So, $y=c_1x^{-5}+c_2x^4$
+
+\newpage\subsubsection{Example 2}
+Solve the DE: $x^2y''-7xy'+41y=0$
+\paragraph{Solution} We have a CE with $a=1,\;b=-7,\;c=41$
+\\The auxiliary equation is $m^2+(-7-1)m+41=0\Rightarrow m^2-8m+41=0$
+\\$m=\frac{-(-8)\pm\sqrt{(-8)^2-4(1)(41)}}{2(1)}=\frac{8\pm\sqrt{64-164}}{2}=\frac{8\pm i10}{2}=4\pm 5i$
+\\The solution is $y=x^4(c_1\cos(5\ln x)+c_2\sin(5\ln x))$
+
+\subsubsection{Example 3}
+Solve the DE: $4x^2y''+y=0$
+\paragraph{Solution} We have a CE with $a=4,b=0,c=1$
+\\The auxiliary equation is $4m^2+(0-4)m+1=0\Rightarrow 4m^2-4m+1=0\Rightarrow(2m-1)(2m-1)=0\Rightarrow m=\frac{1}{2},\frac{1}{2}$
+\\The solution is: $y=c_1x^{\frac{1}{2}}+c_2x^{\frac{1}{2}}\ln x$
+
+\subsubsection{Example 4}
+Solve $x^2y''-4xy'+6y=\ln x^2$
+\paragraph{Solution} From this, we see that $f(x)=\frac{\ln x^2}{x^2}$
+\\The associated homogeneous equation is $x^2y''-4xy'+6y=0$
+\\This is a CE with $a=1,\;b=-4,\;c=6$
+\\The auxiliary equation is $m^2-5m+6=0\Rightarrow(m-2)(m-3)=0\Rightarrow m=2,3$
+\\Thus $y_c=c_1x^2+c_2x^3$
+\\\\Let $y_p=u_1y_1+u_2y_2$ (variation of parameters)
+\\$W=\mat{y_1}{y_2}{y_1'}{y_2'}=\mat{x^2}{x^3}{2x}{3x^2}=3x^4-2x^4=x^4$
+\\$W_1=\mat{0}{y_2}{f(x)}{y_2'}=\mat{0}{x^3}{\frac{\ln x^2}{x^2}}{3x^2}=0-x^3\frac{\ln x^2}{x^2}=-x\ln x^2=-2x\ln x$
+\\$W_2=\mat{y_1}{0}{y_1'}{f(x)}=\mat{x^2}{0}{2x}{\frac{\ln x^2}{x^2}}=x^2\frac{\ln x^2}{x^2}=\ln x^2=2\ln x$
+\\$u_1'=\frac{W_1}{W}=\frac{-2x\ln x}{x^4}=\frac{-2\ln x}{x^3}$
+\\$u_1=-2\int\frac{\ln x}{x^3}dx$, let $u=\ln x$, $du=\frac{1}{x}dx$, $v=\frac{x^{-2}}{-2}, dv=x^{-3}dx$
+\\$u_1=-2\left[\ln x\frac{x^{-2}}{-2}-\int\frac{1}{x}\frac{x^{-2}}{-2}dx\right]
+\\u_1=\frac{\ln x}{x^2}-\frac{x^{-2}}{-2}=\frac{\ln x}{x^2}+\frac{1}{2x^2}$
+\\$u_2'=\frac{W_2}{W}=\frac{2\ln x}{x^4}\Rightarrow u_2=2\int\frac{\ln x}{x^4}dx$
+\\Let $u=\ln x$, $du=\frac{1}{x}dx$, $v=\frac{x^{-3}}{-3}$, $dv=x^{-4}dx$
+\\$u_2=2\left[\ln x(\frac{x^{-3}}{-3})-\int\frac{1}{x}\frac{x^{-3}}{-3}dx\right]$
+\\$=\frac{-2}{3}\frac{\ln x}{x^3}+\frac{2}{3}\int x^{-4}dx=\frac{-2}{3}\frac{\ln x}{x^3}+\frac{2}{3}\frac{x^{-3}}{-3}=\frac{-2}{3}\frac{\ln x}{x^3}-\frac{2}{9x^3}$
+\\$y_p=u_1y_1+u_2y_2=(\frac{\ln x}{x^2}+\frac{1}{2x^2})x^2+(\frac{-2}{3}\frac{\ln x}{x^3}-\frac{2}{9x^3})x^3$
+\\The solution is $y=y_c+y_p=c_1x^2+c_2x^3+\ln x+\frac{1}{2}-\frac{2}{3}\ln x-\frac{2}{9}$
+\\\\Side note: Put $t=\ln x\Rightarrow x=e^t$
+\\$\frac{dy}{dx}=\frac{dy}{dt}\frac{dt}{dx}=\frac{dy}{dt}\cdot\frac{1}{x}$
+
 
 \end{document}
